@@ -40,5 +40,14 @@ $capabilities = array(
         'archetypes' => array(
             'user' => CAP_ALLOW,
         ),
+    ),
+
+    'block/overviewmyrolesincourses:viewcontent' => array(
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'user' => CAP_ALLOW,
+        ),
     )
 );
