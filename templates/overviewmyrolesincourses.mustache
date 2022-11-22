@@ -16,6 +16,117 @@
 }}
 {{!
     @template block_overviewmyrolesincourses/overviewmyrolesincourses
+
+   Example context (json):
+   {
+     "manager": [
+       {
+         "roleid": "1",
+         "shortname": "manager",
+         "kursid": "3",
+         "kursname": "Testing filters",
+         "visible": "0",
+         "url": "\/course\/view.php?id=3",
+         "visibility": "dimmed",
+         "duration": "23\/07\/2021 - 24\/07\/2022",
+         "durationstatusofcourse": "overviewmyrolesincourses-coursefinished",
+         "showdeleteicon": "1",
+         "urldelete": "\/course\/delete.php?id=3"
+       }
+     ],
+     "hasmanager": true,
+     "editingteacher": [
+       {
+         "roleid": "3",
+         "shortname": "editingteacher",
+         "kursid": "4",
+         "kursname": "Activities (plugins)",
+         "visible": "1",
+         "url": "\/course\/view.php?id=4",
+         "visibility": "",
+         "duration": "23\/07\/2021 - 24\/07\/2023",
+         "durationstatusofcourse": "overviewmyrolesincourses-courseactiv",
+         "showdeleteicon": "1",
+         "urldelete": "\/course\/delete.php?id=4"
+       },
+       {
+         "roleid": "3",
+         "shortname": "editingteacher",
+         "kursid": "3",
+         "kursname": "Testing filters",
+         "visible": "0",
+         "url": "\/course\/view.php?id=3",
+         "visibility": "dimmed",
+         "duration": "23\/07\/2021 - 24\/07\/2022",
+         "durationstatusofcourse": "overviewmyrolesincourses-coursefinished",
+         "showdeleteicon": "1",
+         "urldelete": "\/course\/delete.php?id=3"
+       }
+     ],
+     "haseditingteacher": true,
+     "teacher": [],
+     "hasteacher": true,
+     "student": [
+       {
+         "roleid": "5",
+         "shortname": "student",
+         "kursid": "5",
+         "kursname": "Mathe fractions",
+         "visible": "1",
+         "url": "\/course\/view.php?id=5",
+         "visibility": "",
+         "duration": "19\/08\/2030 - 19\/08\/2040",
+         "durationstatusofcourse": "overviewmyrolesincourses-coursefuture",
+         "showdeleteicon": "1",
+         "urldelete": "\/course\/delete.php?id=5"
+       },
+       {
+         "roleid": "5",
+         "shortname": "student",
+         "kursid": "4",
+         "kursname": "Activities (plugins)",
+         "visible": "1",
+         "url": "\/course\/view.php?id=4",
+         "visibility": "",
+         "duration": "23\/07\/2021 - 24\/07\/2023",
+         "durationstatusofcourse": "overviewmyrolesincourses-courseactiv",
+         "showdeleteicon": "1",
+         "urldelete": "\/course\/delete.php?id=4"
+       },
+       {
+         "roleid": "5",
+         "shortname": "student",
+         "kursid": "3",
+         "kursname": "Testing filters",
+         "visible": "0",
+         "url": "\/course\/view.php?id=3",
+         "visibility": "dimmed",
+         "duration": "23\/07\/2021 - 24\/07\/2022",
+         "durationstatusofcourse": "overviewmyrolesincourses-coursefinished",
+         "showdeleteicon": "1",
+         "urldelete": "\/course\/delete.php?id=3"
+       }
+     ],
+     "hasstudent": true,
+     "guest": [
+       {
+         "roleid": "6",
+         "shortname": "guest",
+         "kursid": "6",
+         "kursname": "CodeRunner",
+         "visible": "0",
+         "url": "\/course\/view.php?id=6",
+         "visibility": "dimmed",
+         "duration": "07\/03\/2028 - open ",
+         "durationstatusofcourse": "overviewmyrolesincourses-coursefuture",
+         "showdeleteicon": "1",
+         "urldelete": "\/course\/delete.php?id=6"
+       }
+     ],
+     "hasguest": true
+   }
+
+
 }}
 
 {{#hasmanager}}
