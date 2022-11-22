@@ -15,27 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This block lists the all courses and roles a user is enroled.
+ * This block lists the all courses and roles a user is enrolled.
  *
  * @package    block_overviewmyrolesincourses
  * @copyright  Andreas Schenkel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class block_overviewmyrolesincourses extends block_base {
-    /**
-     * @return void
-     * @throws coding_exception
-     */
+
     public function init() {
         $this->title = get_string('title', 'block_overviewmyrolesincourses');
     }
 
-    /**
-     * @return stdClass|stdObject|string|null
-     * @throws coding_exception
-     * @throws dml_exception
-     */
     public function get_content() {
         // Check if block is activated in websiteadministration plugin settings.
         $isactiv = get_config( 'block_overviewmyrolesincourses', 'isactiv');
@@ -86,13 +77,14 @@ class block_overviewmyrolesincourses extends block_base {
     }
 
     /**
-     * @param $userid
-     * @param $enroledcourses
-     * @param $roleid
+     * Gets all courses a user is enroled with a role indicated by $roleid.
+     *
+     * @param $userid the id of the user
+     * @param $enroledcourses all courses a user is enrolled
+     * @param $roleid the roleid of the role
      * @return array
      */
     public function get_courses_enroled_with_roleid($userid, $enroledcourses, $roleid): array {
-        global $OUTPUT;
         $result = [];
         foreach ($enroledcourses as $enroledcourse) {
             $coursecontext = context_course::instance($enroledcourse->id);
@@ -149,9 +141,9 @@ class block_overviewmyrolesincourses extends block_base {
 
     /**
      * Evaluates the start and enddate in order to return this period as a string and the css-code to
-     * be uses for allready finished courses, just actual usabel courses and courses that will start in the future.
+     * be uses for already finished courses, just actual usabel courses and courses that will start in the future.
      *
-     * @param $course
+     * @param $course The course we are looking for duration information.
      * @return stdClass Contains the duration as string and css code for the status
      * @throws coding_exception
      * @throws dml_exception
@@ -169,7 +161,6 @@ class block_overviewmyrolesincourses extends block_base {
             $enddate = get_string('noenddate', 'block_overviewmyrolesincourses') . ' ';
         }
 
-        // Auslagern: @todo in Funktion.
         $coursecss = '';
         // Documentation of code: if ($course->startdate <= $now) {.
         if ($courserecord->startdate <= $now) {
