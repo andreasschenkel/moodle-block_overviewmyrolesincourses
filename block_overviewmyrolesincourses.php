@@ -77,8 +77,7 @@ class block_overviewmyrolesincourses extends block_base {
             }
         }
         // To get example-json for mustache uncomment following line of code.
-        // This can be uses to get a json-example $objectasjson = json_encode($object); .
-        $objectasjson = json_encode($object);
+        // This can be uses to get a json-example $objectasjson = json_encode($object);
         // Now render the page.
         $this->content = new stdClass;
         $data = $object;
@@ -91,9 +90,9 @@ class block_overviewmyrolesincourses extends block_base {
     /**
      * Gets all courses a user is enroled with a role indicated by $roleid.
      *
-     * @param $userid the id of the user
-     * @param $enroledcourses all courses a user is enrolled
-     * @param $roleid the roleid of the role
+     * @param string $userid id of the user
+     * @param array $enroledcourses objects of stdClass of courses a user is enrolled
+     * @param string $roleid roleid of the role
      * @return array
      * @throws coding_exception
      * @throws dml_exception
@@ -156,8 +155,8 @@ class block_overviewmyrolesincourses extends block_base {
      * Evaluates the start and enddate in order to return this period as a string and the css-code to
      * be uses for already finished courses, just actual usabel courses and courses that will start in the future.
      *
-     * @param $course The course we are looking for duration information.
-     * @return stdClass Contains the duration as string and css code for the status
+     * @param stdClass $course we are looking for duration information.
+     * @return stdClass an object contains the duration as string and css code for the status
      * @throws coding_exception
      * @throws dml_exception
      */
