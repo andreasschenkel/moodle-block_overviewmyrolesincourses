@@ -22,11 +22,23 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_overviewmyrolesincourses extends block_base {
-
+    /**
+     * Initialisation
+     *
+     * @return void
+     * @throws coding_exception
+     */
     public function init() {
         $this->title = get_string('title', 'block_overviewmyrolesincourses');
     }
 
+    /**
+     * Implements the contentcreation.
+     *
+     * @return stdClass|stdObject|string|null
+     * @throws coding_exception
+     * @throws dml_exception
+     */
     public function get_content() {
         // Check if block is activated in websiteadministration plugin settings.
         $isactiv = get_config( 'block_overviewmyrolesincourses', 'isactiv');
@@ -66,7 +78,7 @@ class block_overviewmyrolesincourses extends block_base {
         }
         // To get example-json for mustache uncomment following line of code.
         // This can be uses to get a json-example $objectasjson = json_encode($object); .
-
+        $objectasjson = json_encode($object);
         // Now render the page.
         $this->content = new stdClass;
         $data = $object;
@@ -83,6 +95,8 @@ class block_overviewmyrolesincourses extends block_base {
      * @param $enroledcourses all courses a user is enrolled
      * @param $roleid the roleid of the role
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_courses_enroled_with_roleid($userid, $enroledcourses, $roleid): array {
         $result = [];
@@ -137,7 +151,6 @@ class block_overviewmyrolesincourses extends block_base {
     public function has_config() {
         return true;
     }
-
 
     /**
      * Evaluates the start and enddate in order to return this period as a string and the css-code to
