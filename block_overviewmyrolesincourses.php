@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 class block_overviewmyrolesincourses extends block_base {
     /**
      * @return void
@@ -39,7 +37,7 @@ class block_overviewmyrolesincourses extends block_base {
      * @throws dml_exception
      */
     public function get_content() {
-        // Check if block is activated in websiteadministration plugin settings
+        // Check if block is activated in websiteadministration plugin settings.
         $isactiv = get_config( 'block_overviewmyrolesincourses', 'isactiv');
         if (!get_config( 'block_overviewmyrolesincourses', 'isactiv')) {
             return "isactiv = $isactiv";
@@ -61,22 +59,24 @@ class block_overviewmyrolesincourses extends block_base {
             // 2. Die Rollen ermitteln die laut Konfiguration supported sind.
             $supportedroles = get_config('block_overviewmyrolesincourses', 'supportedroles');
             $configuredsupportedroles = explode(',', $supportedroles);
-            // 3. Die Rollen ermitteln die im system vorhanden sind.
+            // 3. Get all existing roles.
             $systemcontext = \context_system::instance();
             $rolefixnames = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
-            //4. Über alle Rollen itterieren aber nur bei den supporteten Rollen was machen.
+            // 4. Check for all role it the role is supported and then in which courses the user has this role.
             foreach ($rolefixnames as $rolefixname) {
                 if (in_array($rolefixname->id, $configuredsupportedroles)) {
-                    //5. nur hier uss man alle eingeschriebenen course durchgehen und schauen, ob die rolle dort eingeschriebn ist
+                    // 5. If role is supported then add look in the enrolled courses if the user is enrolled with this role.
                     $shortname = $rolefixname->shortname;
-                    $object->$shortname = $this->get_courses_from_enroledcourses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
+                    $object->$shortname = $this->get_courses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
                     $hasrole = "has$shortname";
                     $object->$hasrole = true;
                 }
             }
         }
-        $objectAsJson = json_encode($object);
-        // Seite zusammenbauen und dabei Renderer nutzen
+        // To get example-json for mustache uncomment following line of code.
+        // This can be uses to get a json-example $objectasjson = json_encode($object); .
+
+        // Now render the page.
         $this->content = new stdClass;
         $data = $object;
         $this->content->text = $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
@@ -91,16 +91,16 @@ class block_overviewmyrolesincourses extends block_base {
      * @param $roleid
      * @return array
      */
-    public function get_courses_from_enroledcourses_enroled_with_roleid($userid, $enroledcourses, $roleid): array {
+    public function get_courses_enroled_with_roleid($userid, $enroledcourses, $roleid): array {
         global $OUTPUT;
-        $antwort = [];
+        $result = [];
         foreach ($enroledcourses as $enroledcourse) {
             $coursecontext = context_course::instance($enroledcourse->id);
             if ($enroledcourse->visible == 0 && !has_capability('moodle/course:viewhiddencourses', $coursecontext)) {
                 // Only show invisible courses if capability moodle/course:viewhiddencourses.
                 continue;
             }
-            // Check capability to delete a course
+            // Check capability to delete a course.
             $showdeleteicon = false;
             if (is_enrolled($coursecontext, $userid, 'moodle/course:delete', $onlyactive = false)) {
                 $showdeleteicon = get_config( 'block_overviewmyrolesincourses', 'showdeleteicon');
@@ -115,37 +115,47 @@ class block_overviewmyrolesincourses extends block_base {
                     $enroledcoursewithrole->roleid = $roleid;
                     $enroledcoursewithrole->shortname = $userrole->shortname;
 
-                    // Add all needed courseinformations
+                    // Add all needed courseinformations.
                     $enroledcoursewithrole->kursid = $enroledcourse->id;
                     $enroledcoursewithrole->kursname = $enroledcourse->shortname;
                     $enroledcoursewithrole->visible = $enroledcourse->visible;
 
-                    // Add additionalInformation like url to the course, ...
+                    // Add additional information like url to the course, ...
                     $url = "$CFG->wwwroot/course/view.php?id=$enroledcourse->id";
                     $urldelete = "$CFG->wwwroot/course/delete.php?id=$enroledcourse->id";
-                    $enroledcoursewithrole->url =$url;
+                    $enroledcoursewithrole->url = $url;
                     $enroledcoursewithrole->visibility = $visibility;
                     $enroledcoursewithrole->duration = $this->createduration($enroledcourse)->duration;
                     $enroledcoursewithrole->durationstatusofcourse = $this->createduration($enroledcourse)->durationstatusofcourse;
                     $enroledcoursewithrole->showdeleteicon = $showdeleteicon;
-                    $enroledcoursewithrole->urldelete =$urldelete;
+                    $enroledcoursewithrole->urldelete = $urldelete;
 
-                    $antwort[] = $enroledcoursewithrole;
+                    $result[] = $enroledcoursewithrole;
                 }
             }
         }
-        return $antwort;
+        return $result;
     }
 
     /**
+     * In order to get the settingspage of the plugin in websiteadministration has_config() hast to return true.
+     *
      * @return bool
      */
-    function has_config() {
+    public function has_config() {
         return true;
     }
 
 
-
+    /**
+     * Evaluates the start and enddate in order to return this period as a string and the css-code to
+     * be uses for allready finished courses, just actual usabel courses and courses that will start in the future.
+     *
+     * @param $course
+     * @return stdClass Contains the duration as string and css code for the status
+     * @throws coding_exception
+     * @throws dml_exception
+     */
     private function createduration($course): stdClass {
         global $DB;
         $now = time();
@@ -171,12 +181,9 @@ class block_overviewmyrolesincourses extends block_base {
         } else {
             $coursecss = 'overviewmyrolesincourses-coursefuture';
         }
-        $dummy = new stdClass();
-        $dummy->duration = "$startdate - $enddate";
-        $dummy->durationstatusofcourse = $coursecss;
-        return $dummy;
+        $result = new stdClass();
+        $result->duration = "$startdate - $enddate";
+        $result->durationstatusofcourse = $coursecss;
+        return $result;
     }
-
-
-
 }
