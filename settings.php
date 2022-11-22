@@ -20,6 +20,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $settings = new admin_settingpage( 'block_overviewmyrolesincourses',  get_string('pluginname', 'block_overviewmyrolesincourses') );
 if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox(
@@ -41,7 +43,7 @@ if ($ADMIN->fulltree) {
             $options[$rolename->id] = $rolename->id . " - " .
                 $rolename->shortname . " - " .
                 $rolename->localname;
-;        }
+        }
     }
     $settings->add(new admin_setting_configmultiselect('block_overviewmyrolesincourses/supportedroles',
         get_string('supportedroles', 'block_overviewmyrolesincourses'),
