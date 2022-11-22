@@ -18,8 +18,12 @@ F: Installing manually
 
 Block that shows a list of all courses a user is enrolled .
 
+![example_for_siteadmin](https://github.com/andreasschenkel/moodle-block_overviewmyrolesincourses/blob/master/documentation/example_for_siteadmin.png)
+
 
 ## B: Settings ##
+
+![settings](https://github.com/andreasschenkel/moodle-block_overviewmyrolesincourses/blob/master/documentation/settings.png)
 
 - block_overviewmyrolesincourses | isactiv (set true, the block is activated)  
 - block_overviewmyrolesincourses | supportedroles (Siteadmin can select the roles that should be supported from a list of roles that can be assigned in coursecontext.)  
