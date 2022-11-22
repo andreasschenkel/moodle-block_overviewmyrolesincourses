@@ -19,6 +19,7 @@ namespace block_overviewmyrolesincourses\privacy;
 /**
  * Privacy Subsystem for block_overviewmyrolesincourses implementing null_provider.
  *
+ * @package    block_overviewmyrolesincourses
  * @copyright  2022 Andreas Schenkel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
