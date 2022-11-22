@@ -1,0 +1,159 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_overviewmyrolesincourses/overviewmyrolesincourses
+}}
+
+{{#hasmanager}}
+<div class="border shadow mb-4">
+    <div class="border p-2 overviewmyrolesincourses-bg-manager">manager</div>
+    <div class="border p-1">
+            {{#manager}}
+            <div class="{{durationstatusofcourse}} {{visibility}}">
+                <div class="{{visibility}}">
+                    <a href="{{url}}" class="{{visibility}}" title="{{kursname}} {{kursid}}">
+                        <i class="icon fa fa-graduation-cap fa-fw"></i>{{kursname}} {{kursid}}
+                    </a>
+                    {{#visible}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/visible}}
+                    {{^visible}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/visible}}
+                    {{#showdeleteicon}}
+                        <a href="{{urldelete}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    {{/showdeleteicon}}
+                    {{^showdeleteicon}}
+                        nicht löschbar
+                    {{/showdeleteicon}}
+                </div>
+                <div class="{{visibility}}">
+                     {{duration}}
+                </div>
+            </div>
+            {{/manager}}
+    </div>
+</div>
+{{/hasmanager}}
+
+{{#haseditingteacher}}
+<div class="border shadow mb-4">
+    <div class="border p-2 overviewmyrolesincourses-bg-editingteacher">editingteacher</div>
+    <div class="border p-1">
+            {{#editingteacher}}
+            <div class="{{durationstatusofcourse}} {{visibility}}">
+                <div class="{{visibility}}">
+                    <a href="{{url}}" class="{{classes}}" title="{{kursname}} {{kursid}}">
+                        <i class="icon fa fa-graduation-cap fa-fw"></i>{{kursname}} {{kursid}}
+                    </a>
+                    {{#visible}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/visible}}
+                    {{^visible}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/visible}}
+                    {{#showdeleteicon}}
+                        <a href="{{urldelete}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    {{/showdeleteicon}}
+                    {{^showdeleteicon}}
+                        nicht löschbar
+                    {{/showdeleteicon}}
+                </div>
+                <div class="{{visibility}}">
+                     {{duration}}
+                </div>
+            </div>
+            {{/editingteacher}}
+    </div>
+</div>
+{{/haseditingteacher}}
+
+{{#hasstudent}}
+<div class="border shadow mb-4">
+    <div class="border p-2 overviewmyrolesincourses-bg-student">student</div>
+    <div class="border p-1">
+            {{#student}}
+            <div class="{{durationstatusofcourse}} {{visibility}}">
+                <div class="{{visibility}}">
+                    <a href="{{url}}" class="{{classes}}" title="{{kursname}} {{kursid}}">
+                        <i class="icon fa fa-graduation-cap fa-fw"></i>{{kursname}} {{kursid}}
+                    </a>
+                    {{#visible}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/visible}}
+                    {{^visible}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/visible}}
+                    {{#showdeleteicon}}
+                        <a href="{{urldelete}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    {{/showdeleteicon}}
+                    {{^showdeleteicon}}
+                        nicht löschbar
+                    {{/showdeleteicon}}
+                </div>
+                <div class="{{visibility}}">
+                     {{duration}}
+                </div>
+            </div>
+            {{/student}}
+    </div>
+</div>
+{{/hasstudent}}
+
+
+{{#hasguest}}
+<div class="border shadow mb-4">
+    <div class="border p-2 overviewmyrolesincourses-bg-guest">guest</div>
+    <div class="border p-1">
+            {{#guest}}
+            <div class="{{durationstatusofcourse}} {{visibility}}">
+                <div class="{{visibility}}">
+                    <a href="{{url}}" class="{{classes}}" title="{{kursname}} {{kursid}}">
+                        <i class="icon fa fa-graduation-cap fa-fw"></i>{{kursname}} {{kursid}}
+                    </a>
+                    {{#visible}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/visible}}
+                    {{^visible}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/visible}}
+                    {{#showdeleteicon}}
+                        <a href="{{urldelete}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    {{/showdeleteicon}}
+                    {{^showdeleteicon}}
+                        nicht löschbar
+                    {{/showdeleteicon}}
+                </div>
+                <div class="{{visibility}}">
+                     {{duration}}
+                </div>
+            </div>
+            {{/guest}}
+    </div>
+</div>
+{{/hasguest}}
+
+<div class="row" style="margin-left: 3px;">
+    <div class="overviewmyrolesincourses-coursefinished" style="width: 80px;">
+        finished
+    </div>
+    <div class="overviewmyrolesincourses-coursefinished dimmed" style="width: 100px;">
+        but not visible
+    </div>
+</div>
+
+<div class="row" style="margin-left: 3px;">
+    <div class="overviewmyrolesincourses-courseactiv" style="width: 80px;">
+        activ
+    </div>
+    <div class="overviewmyrolesincourses-courseactiv dimmed" style="width: 100px;">
+        but not visible
+    </div>
+</div>
+
+<div class="row" style="margin-left: 3px;">
+    <div class="overviewmyrolesincourses-coursefuture" style="width: 80px;">
+        future
+    </div>
+    <div class="overviewmyrolesincourses-coursefuture dimmed" style="width: 100px;">
+        but not visible
+    </div>
+</div>

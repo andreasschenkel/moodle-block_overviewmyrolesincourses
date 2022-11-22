@@ -1,0 +1,36 @@
+.overviewmyrolesincourses-bg-manager {
+    background-color: #aaa!important;
+}
+
+.overviewmyrolesincourses-bg-editingteacher {
+    background-color: #bbb!important;
+}
+
+.overviewmyrolesincourses-bg-student {
+    background-color: #ccc!important;
+}
+
+.overviewmyrolesincourses-bg-guest {
+    background-color: #ddd!important;
+}
+
+.overviewmyrolesincourses-coursefinished {
+    border-left: solid 5px rgb(155, 13, 13);
+}
+.overviewmyrolesincourses-coursefinished.dimmed {
+    border-left: solid 5px rgb(166, 119, 119);
+}
+
+.overviewmyrolesincourses-courseactiv {
+    border-left: solid 5px rgb(53, 244, 127);
+}
+.overviewmyrolesincourses-courseactiv.dimmed {
+    border-left: solid 5px rgb(111, 169, 134);
+}
+
+.overviewmyrolesincourses-coursefuture {
+    border-left: solid 5px rgb(58, 132, 241);
+}
+.overviewmyrolesincourses-coursefuture.dimmed {
+    border-left: solid 5px rgb(158, 190, 238);
+}
