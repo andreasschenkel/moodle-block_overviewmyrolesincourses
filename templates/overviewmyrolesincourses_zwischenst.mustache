@@ -124,14 +124,15 @@
      ],
      "hasguest": true
    }
+
+
 }}
 
-
-{{#mylist}}
-{{#0}}
+{{#hasmanager}}
 <div class="border shadow mb-4">
-    <div class="border p-2 overviewmyrolesincourses-bg-manager">{{rolename}}</div>
+    <div class="border p-2 overviewmyrolesincourses-bg-manager">manager</div>
     <div class="border p-1">
+            {{#manager}}  {{rolename}}
             <div class="{{durationstatusofcourse}} {{visibility}}">
                 <div class="{{visibility}}">
                     <a href="{{url}}" class="{{visibility}}" title="{{coursefullname}}">
@@ -140,21 +141,93 @@
                     {{#visible}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/visible}}
                     {{^visible}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/visible}}
                     {{#showdeleteicon}}
-                        <a href="{{urldelete}}">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
+                        <a href="{{urldelete}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     {{/showdeleteicon}}
                 </div>
                 <div class="{{visibility}}">
                      {{duration}}
                 </div>
             </div>
+            {{/manager}}
     </div>
 </div>
-{{/0}}
-{{/mylist}}
+{{/hasmanager}}
+
+{{#haseditingteacher}}
+<div class="border shadow mb-4">
+    <div class="border p-2 overviewmyrolesincourses-bg-editingteacher">editingteacher</div>
+    <div class="border p-1">
+            {{#editingteacher}}
+            <div class="{{durationstatusofcourse}} {{visibility}}">
+                <div class="{{visibility}}">
+                    <a href="{{url}}" class="{{classes}}" title="{{coursefullname}}">
+                        <i class="icon fa fa-graduation-cap fa-fw"></i>{{coursefullname}}
+                    </a>
+                    {{#visible}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/visible}}
+                    {{^visible}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/visible}}
+                    {{#showdeleteicon}}
+                        <a href="{{urldelete}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    {{/showdeleteicon}}
+                </div>
+                <div class="{{visibility}}">
+                     {{duration}}
+                </div>
+            </div>
+            {{/editingteacher}}
+    </div>
+</div>
+{{/haseditingteacher}}
+
+{{#hasstudent}}
+<div class="border shadow mb-4">
+    <div class="border p-2 overviewmyrolesincourses-bg-student">student</div>
+    <div class="border p-1">
+            {{#student}}
+            <div class="{{durationstatusofcourse}} {{visibility}}">
+                <div class="{{visibility}}">
+                    <a href="{{url}}" class="{{classes}}" title="{{coursefullname}}">
+                        <i class="icon fa fa-graduation-cap fa-fw"></i>{{coursefullname}}
+                    </a>
+                    {{#visible}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/visible}}
+                    {{^visible}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/visible}}
+                    {{#showdeleteicon}}
+                        <a href="{{urldelete}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    {{/showdeleteicon}}
+                </div>
+                <div class="{{visibility}}">
+                     {{duration}}
+                </div>
+            </div>
+            {{/student}}
+    </div>
+</div>
+{{/hasstudent}}
 
 
+{{#hasguest}}
+<div class="border shadow mb-4">
+    <div class="border p-2 overviewmyrolesincourses-bg-guest">guest</div>
+    <div class="border p-1">
+            {{#guest}}
+            <div class="{{durationstatusofcourse}} {{visibility}}">
+                <div class="{{visibility}}">
+                    <a href="{{url}}" class="{{classes}}" title="{{coursefullname}}">
+                        <i class="icon fa fa-graduation-cap fa-fw"></i>{{coursefullname}}
+                    </a>
+                    {{#visible}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/visible}}
+                    {{^visible}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/visible}}
+                    {{#showdeleteicon}}
+                        <a href="{{urldelete}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    {{/showdeleteicon}}
+                </div>
+                <div class="{{visibility}}">
+                     {{duration}}
+                </div>
+            </div>
+            {{/guest}}
+    </div>
+</div>
+{{/hasguest}}
 
 <div class="row" style="margin-left: 3px;">
     <div class="overviewmyrolesincourses-coursefinished" style="width: 80px;">

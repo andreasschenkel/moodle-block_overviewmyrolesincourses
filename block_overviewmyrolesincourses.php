@@ -58,31 +58,36 @@ class block_overviewmyrolesincourses extends block_base
         }
 
         global $USER, $OUTPUT;
-        // 1. Erstmal alle Kurse in die ein user eingeschrieben ist ermitteln.
+        // 1. Find all courses a user is enrolled.
         $enroledcourses = enrol_get_my_courses();
         $object = new stdClass();
+        $dummy = [];
         if ($enroledcourses) {
-            // 2. Die Rollen ermitteln die laut Konfiguration supported sind.
+            // 2. Find all roles that the admin has configured as supported roles for this block.
             $supportedroles = get_config('block_overviewmyrolesincourses', 'supportedroles');
             $configuredsupportedroles = explode(',', $supportedroles);
             // 3. Get all existing roles.
             $systemcontext = \context_system::instance();
             $rolefixnames = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
-            // 4. Check for all role it the role is supported and then in which courses the user has this role.
+            // 4. Check for every role if the role is supported and then in which courses the user has this role.
             foreach ($rolefixnames as $rolefixname) {
                 if (in_array($rolefixname->id, $configuredsupportedroles)) {
                     // 5. If role is supported then add look in the enrolled courses if the user is enrolled with this role.
                     $shortname = $rolefixname->shortname;
-                    $object->$shortname = $this->get_courses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
-                    $hasrole = "has$shortname";
-                    $object->$hasrole = true;
+                    //$object->$shortname = $this->get_courses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
+
+                    //$hasrole = "has$shortname";
+                    //$object->$hasrole = true;
+                    $dummy[] = $this->get_courses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
                 }
             }
+
         }
         // To get example-json for mustache uncomment following line of code.
         // This can be uses to get a json-example $objectasjson = json_encode($object);
         // Now render the page.
         $this->content = new stdClass;
+        $object->mylist = $dummy;
         $data = $object;
         $this->content->text = $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
         $footer = '';
