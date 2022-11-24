@@ -21,14 +21,16 @@
  * @copyright  Andreas Schenkel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_overviewmyrolesincourses extends block_base {
+class block_overviewmyrolesincourses extends block_base
+{
     /**
      * Initialisation
      *
      * @return void
      * @throws coding_exception
      */
-    public function init() {
+    public function init()
+    {
         $this->title = get_string('title', 'block_overviewmyrolesincourses');
     }
 
@@ -39,10 +41,11 @@ class block_overviewmyrolesincourses extends block_base {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function get_content() {
+    public function get_content()
+    {
         // Check if block is activated in websiteadministration plugin settings.
-        $isactiv = get_config( 'block_overviewmyrolesincourses', 'isactiv');
-        if (!get_config( 'block_overviewmyrolesincourses', 'isactiv')) {
+        $isactiv = get_config('block_overviewmyrolesincourses', 'isactiv');
+        if (!get_config('block_overviewmyrolesincourses', 'isactiv')) {
             return "isactiv = $isactiv";
         }
         if ($this->content !== null) {
@@ -97,7 +100,8 @@ class block_overviewmyrolesincourses extends block_base {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function get_courses_enroled_with_roleid($userid, $enroledcourses, $roleid): array {
+    public function get_courses_enroled_with_roleid($userid, $enroledcourses, $roleid): array
+    {
         $result = [];
         foreach ($enroledcourses as $enroledcourse) {
             $coursecontext = context_course::instance($enroledcourse->id);
@@ -108,7 +112,7 @@ class block_overviewmyrolesincourses extends block_base {
             // Check capability to delete a course.
             $showdeleteicon = false;
             if (is_enrolled($coursecontext, $userid, 'moodle/course:delete', $onlyactive = false)) {
-                $showdeleteicon = get_config( 'block_overviewmyrolesincourses', 'showdeleteicon');
+                $showdeleteicon = get_config('block_overviewmyrolesincourses', 'showdeleteicon');
             }
 
             $enroledcoursewithrole = new stdClass();
@@ -126,12 +130,12 @@ class block_overviewmyrolesincourses extends block_base {
                     $enroledcoursewithrole->visible = $enroledcourse->visible;
 
                     // Add additional information like url to the course, ...
-                    $url = "$CFG->wwwroot/course/view.php?id=$enroledcourse->id";
-                    $urldelete = "$CFG->wwwroot/course/delete.php?id=$enroledcourse->id";
+                    $url = new moodle_url('/course/view.php', ['id' => $enroledcourse->id]);
+                    $urldelete = new moodle_url('/course/delete.php', ['id' => $enroledcourse->id]);
                     $enroledcoursewithrole->url = $url;
                     $enroledcoursewithrole->visibility = $visibility;
-                    $enroledcoursewithrole->duration = $this->createduration($enroledcourse)->duration;
-                    $enroledcoursewithrole->durationstatusofcourse = $this->createduration($enroledcourse)->durationstatusofcourse;
+                    $enroledcoursewithrole->duration = $this->create_duration($enroledcourse)->duration;
+                    $enroledcoursewithrole->durationstatusofcourse = $this->create_duration($enroledcourse)->durationstatusofcourse;
                     $enroledcoursewithrole->showdeleteicon = $showdeleteicon;
                     $enroledcoursewithrole->urldelete = $urldelete;
 
@@ -147,7 +151,8 @@ class block_overviewmyrolesincourses extends block_base {
      *
      * @return bool
      */
-    public function has_config() {
+    public function has_config()
+    {
         return true;
     }
 
@@ -160,15 +165,17 @@ class block_overviewmyrolesincourses extends block_base {
      * @throws coding_exception
      * @throws dml_exception
      */
-    private function createduration($course): stdClass {
+    private function create_duration(stdClass $course): stdClass
+    {
         global $DB;
         $now = time();
-        $startdate = date('d/m/Y', $course->startdate);
+        // $startdate = date('d/m/Y', $course->startdate);
+        $startdate = userdate($course->startdate,  get_string('strftimedatefullshort', 'core_langconfig'));
 
         // Code: course->enddate is empty if function enrol_get_my_courses() was used.
-        $courserecord = $DB->get_record('course', array('id' => $course->id));
+        $courserecord = $DB->get_record('course', ['id' => $course->id]);
         if ($courserecord->enddate) {
-            $enddate = date('d/m/Y', $courserecord->enddate);
+            $enddate = userdate($courserecord->enddate, get_string('strftimedatefullshort', 'core_langconfig'));
         } else {
             $enddate = get_string('noenddate', 'block_overviewmyrolesincourses') . ' ';
         }
