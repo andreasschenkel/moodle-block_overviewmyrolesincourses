@@ -21,16 +21,14 @@
  * @copyright  Andreas Schenkel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_overviewmyrolesincourses extends block_base
-{
+class block_overviewmyrolesincourses extends block_base {
     /**
      * Initialisation
      *
      * @return void
      * @throws coding_exception
      */
-    public function init()
-    {
+    public function init() {
         $this->title = get_string('title', 'block_overviewmyrolesincourses');
     }
 
@@ -41,8 +39,7 @@ class block_overviewmyrolesincourses extends block_base
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function get_content()
-    {
+    public function get_content() {
         // Check if block is activated in websiteadministration plugin settings.
         $isactiv = get_config('block_overviewmyrolesincourses', 'isactiv');
         if (!get_config('block_overviewmyrolesincourses', 'isactiv')) {
@@ -105,8 +102,7 @@ class block_overviewmyrolesincourses extends block_base
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function get_courses_enroled_with_roleid($userid, $enroledcourses, $roleid): array
-    {
+    public function get_courses_enroled_with_roleid($userid, $enroledcourses, $roleid): array {
         $result = [];
         foreach ($enroledcourses as $enroledcourse) {
             $coursecontext = context_course::instance($enroledcourse->id);
@@ -158,8 +154,7 @@ class block_overviewmyrolesincourses extends block_base
      *
      * @return bool
      */
-    public function has_config()
-    {
+    public function has_config() {
         return true;
     }
 
@@ -172,8 +167,7 @@ class block_overviewmyrolesincourses extends block_base
      * @throws coding_exception
      * @throws dml_exception
      */
-    private function create_duration(stdClass $course): stdClass
-    {
+    private function create_duration(stdClass $course): stdClass {
         global $DB;
         $now = time();
         // $startdate = date('d/m/Y', $course->startdate);
