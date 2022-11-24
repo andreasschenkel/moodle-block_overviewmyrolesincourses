@@ -123,10 +123,12 @@ class block_overviewmyrolesincourses extends block_base
 
                     $enroledcoursewithrole->roleid = $roleid;
                     $enroledcoursewithrole->shortname = $userrole->shortname;
+                    $enroledcoursewithrole->rolename = role_get_name($userrole);
 
                     // Add all needed courseinformations.
-                    $enroledcoursewithrole->kursid = $enroledcourse->id;
-                    $enroledcoursewithrole->kursname = $enroledcourse->shortname;
+                    $enroledcoursewithrole->courseid = $enroledcourse->id;
+                    $enroledcoursewithrole->courseshortname = $enroledcourse->shortname;
+                    $enroledcoursewithrole->coursefullname = $enroledcourse->fullname;
                     $enroledcoursewithrole->visible = $enroledcourse->visible;
 
                     // Add additional information like url to the course, ...
