@@ -108,7 +108,9 @@ class block_overviewmyrolesincourses extends block_base {
                     // To get example-json for mustache uncomment following line of code.
                     // This can be uses to get a json-example $objectasjson = json_encode($data);
                     // Now render the content for this role and concatenate it with the previous rendered content.
-                    $text .= $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
+                    if (count($data->mylist) > 0) {
+                        $text .= $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
+                    }
                 }
             }
             $text .= self::$agenda;
