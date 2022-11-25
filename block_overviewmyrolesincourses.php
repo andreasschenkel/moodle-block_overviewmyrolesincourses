@@ -58,7 +58,8 @@ class block_overviewmyrolesincourses extends block_base {
         // 1. Find all courses a user is enrolled.
         $enroledcourses = enrol_get_my_courses();
         $object = new stdClass();
-        $dummy = [];
+        $contextdata = [];
+        $this->content = new stdClass;
         if ($enroledcourses) {
             // 2. Find all roles that the admin has configured as supported roles for this block.
             $supportedroles = get_config('block_overviewmyrolesincourses', 'supportedroles');
@@ -67,26 +68,22 @@ class block_overviewmyrolesincourses extends block_base {
             $systemcontext = \context_system::instance();
             $rolefixnames = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
             // 4. Check for every role if the role is supported and then in which courses the user has this role.
+
             foreach ($rolefixnames as $rolefixname) {
+                $data = new stdClass();
                 if (in_array($rolefixname->id, $configuredsupportedroles)) {
                     // 5. If role is supported then add look in the enrolled courses if the user is enrolled with this role.
-                    $shortname = $rolefixname->shortname;
-                    //$object->$shortname = $this->get_courses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
-
-                    //$hasrole = "has$shortname";
-                    //$object->$hasrole = true;
-                    $dummy[] = $this->get_courses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
+                    $data->roleshortname = $rolefixname->shortname;
+                    $data->rolelocalname = $rolefixname->localname;
+                    $data->mylist = $this->get_courses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
+                    $objectasjson = json_encode($data);
+                    $this->content->text .= $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
                 }
             }
-
         }
         // To get example-json for mustache uncomment following line of code.
         // This can be uses to get a json-example $objectasjson = json_encode($object);
         // Now render the page.
-        $this->content = new stdClass;
-        $object->mylist = $dummy;
-        $data = $object;
-        $this->content->text = $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
         $footer = '';
         $this->content->footer = $footer;
         return $this->content;
@@ -123,7 +120,7 @@ class block_overviewmyrolesincourses extends block_base {
                     $visibility = $enroledcourse->visible ? '' : 'dimmed';
 
                     $enroledcoursewithrole->roleid = $roleid;
-                    $enroledcoursewithrole->shortname = $userrole->shortname;
+                    $enroledcoursewithrole->roleshortname = $userrole->shortname;
                     $enroledcoursewithrole->rolename = role_get_name($userrole);
 
                     // Add all needed courseinformations.
@@ -170,7 +167,6 @@ class block_overviewmyrolesincourses extends block_base {
     private function create_duration(stdClass $course): stdClass {
         global $DB;
         $now = time();
-        // $startdate = date('d/m/Y', $course->startdate);
         $startdate = userdate($course->startdate,  get_string('strftimedatefullshort', 'core_langconfig'));
 
         // Code: course->enddate is empty if function enrol_get_my_courses() was used.
