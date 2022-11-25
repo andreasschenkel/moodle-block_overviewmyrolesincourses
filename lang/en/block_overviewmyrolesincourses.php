@@ -27,7 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['isactiv'] = 'Activate report';
 $string['isactiv_desc'] = 'If activated the block can be used if the user has the needed capabilities.';
-$string['isactivforsiteadmin'] = 'Activ for siteadmin';
 $string['noenddate'] = 'open';
 $string['overviewmyrolesincourses:myaddinstance'] = 'myaddinstance';
 $string['overviewmyrolesincourses:addinstance'] = 'addinstance';
