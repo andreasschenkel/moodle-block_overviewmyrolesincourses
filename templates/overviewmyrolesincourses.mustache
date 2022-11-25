@@ -17,78 +17,78 @@
 {{!
     @template block_overviewmyrolesincourses/overviewmyrolesincourses
 
-   Example context (json):
-   {
-     "roleshortname": "editingteacher",
-     "rolelocalname": "Trainer\/in",
-     "mylist": [
-       {
-         "roleid": "3",
-         "roleshortname": "editingteacher",
-         "rolename": "Trainer\/in",
-         "courseid": "5",
-         "courseshortname": "Mathe fractions",
-         "coursefullname": "Mathe fractions xxx",
-         "visible": "1",
-         "url": {},
-         "visibility": "",
-         "duration": "19.08.30 - 19.08.40",
-         "durationstatusofcourse": "overviewmyrolesincourses-coursefuture",
-         "showdeleteicon": "1",
-         "urldelete": {}
-       },
-       {
-         "roleid": "3",
-         "roleshortname": "editingteacher",
-         "rolename": "Trainer\/in",
-         "courseid": "4",
-         "courseshortname": "Activities (plugins)",
-         "coursefullname": "Activities (plugins)",
-         "visible": "1",
-         "url": {},
-         "visibility": "",
-         "duration": "23.07.21 - 24.07.23",
-         "durationstatusofcourse": "overviewmyrolesincourses-courseactiv",
-         "showdeleteicon": "1",
-         "urldelete": {}
-       },
-       {
-         "roleid": "3",
-         "roleshortname": "editingteacher",
-         "rolename": "Trainer\/in",
-         "courseid": "3",
-         "courseshortname": "Testing filters",
-         "coursefullname": "Testing filters",
-         "visible": "0",
-         "url": {},
-         "visibility": "dimmed",
-         "duration": "23.07.21 - 24.07.22",
-         "durationstatusofcourse": "overviewmyrolesincourses-coursefinished",
-         "showdeleteicon": "1",
-         "urldelete": {}
-       }
-     ]
-   }
+    Example context (json):
+    {
+      "roleshortname": "editingteacher",
+      "rolelocalname": "Teacher",
+      "mylist": [
+        {
+          "roleid": "3",
+          "roleshortname": "editingteacher",
+          "rolename": "Teacher",
+          "courseid": "5",
+          "courseshortname": "Mathe fractions",
+          "coursefullname": "Mathe fractions xxx",
+          "visible": "1",
+          "url": {},
+          "urldelete": {},
+          "dimmed": "",
+          "duration": "19\/08\/30 - 19\/08\/40",
+          "cssselectordurationstatusofcourse": "overviewmyrolesincourses-coursefuture",
+          "showdeleteicon": "1"
+        },
+        {
+          "roleid": "3",
+          "roleshortname": "editingteacher",
+          "rolename": "Teacher",
+          "courseid": "4",
+          "courseshortname": "Activities (plugins)",
+          "coursefullname": "Activities (plugins)",
+          "visible": "1",
+          "url": {},
+          "urldelete": {},
+          "dimmed": "",
+          "duration": "23\/07\/21 - 24\/07\/23",
+          "cssselectordurationstatusofcourse": "overviewmyrolesincourses-courseinprogress",
+          "showdeleteicon": "1"
+        },
+        {
+          "roleid": "3",
+          "roleshortname": "editingteacher",
+          "rolename": "Teacher",
+          "courseid": "3",
+          "courseshortname": "Testing filters",
+          "coursefullname": "Testing filters",
+          "visible": "0",
+          "url": {},
+          "urldelete": {},
+          "dimmed": "dimmed",
+          "duration": "23\/07\/21 - 24\/07\/22",
+          "cssselectordurationstatusofcourse": "overviewmyrolesincourses-coursefinished",
+          "showdeleteicon": "1"
+        }
+      ]
+    }
 }}
 
 <div class="border shadow mb-4">
     <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}">{{rolelocalname}} - {{roleshortname}}</div>
     {{#mylist}}
         <div class="border p-1">
-                <div class="{{durationstatusofcourse}} {{visibility}}">
-                    <div class="{{visibility}}">
-                        <a href="{{url}}" class="{{visibility}}" title="{{coursefullname}}">
+                <div class="{{cssselectordurationstatusofcourse}} {{dimmed}}">
+                    <div class="{{dimmed}}">
+                        <a href="{{url}}" class="{{dimmed}}" title="{{coursefullname}}">
                             <i class="icon fa fa-graduation-cap fa-fw"></i>{{coursefullname}}
                         </a>
-                        {{#visible}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/visible}}
-                        {{^visible}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/visible}}
+                        {{#dimmed}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/dimmed}}
+                        {{^dimmed}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/dimmed}}
                         {{#showdeleteicon}}
                             <a href="{{urldelete}}">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         {{/showdeleteicon}}
                     </div>
-                    <div class="{{visibility}}">
+                    <div class="{{dimmed}}">
                          {{duration}}
                     </div>
                 </div>

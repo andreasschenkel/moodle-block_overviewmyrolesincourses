@@ -6,12 +6,16 @@
     background-color: #bbb;
 }
 
-.overviewmyrolesincourses-bg-student {
+.overviewmyrolesincourses-bg-teacher {
     background-color: #ccc;
 }
 
-.overviewmyrolesincourses-bg-guest {
+.overviewmyrolesincourses-bg-student {
     background-color: #ddd;
+}
+
+.overviewmyrolesincourses-bg-guest {
+    background-color: #eee;
 }
 
 .overviewmyrolesincourses-coursefinished {
@@ -25,12 +29,12 @@
     padding-left: 5px;
 }
 
-.overviewmyrolesincourses-courseactiv {
+.overviewmyrolesincourses-courseinprogress {
     border-left: solid 5px rgb(53, 244, 127);
     margin-bottom: 5px;
     padding-left: 5px;
 }
-.overviewmyrolesincourses-courseactiv.dimmed {
+.overviewmyrolesincourses-courseinprogress.dimmed {
     border-left: solid 5px rgb(111, 169, 134);
     margin-bottom: 5px;
     padding-left: 5px;

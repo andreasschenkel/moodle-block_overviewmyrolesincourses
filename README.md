@@ -7,11 +7,9 @@ B: Settings
 
 C: Capabilitys
 
-D: Changelog 
+D: Installing via uploaded ZIP file
 
-E: Installing via uploaded ZIP file
-
-F: Installing manually
+E: Installing manually
 
 
 ## A: How to use ##
@@ -40,7 +38,7 @@ Block that shows a list of all courses a user is enrolled .
    
 
 
-## E: Installing via uploaded ZIP file ##
+## D: Installing via uploaded ZIP file ##
 
 1. Log in to your Moodle site as an admin and go to _Site administration >
    Plugins > Install plugins_.
@@ -48,7 +46,7 @@ Block that shows a list of all courses a user is enrolled .
    extra details if your plugin type is not automatically detected.
 3. Check the plugin validation report and finish the installation.
 
-## F: Installing manually ##
+## E: Installing manually ##
 
 The plugin can be also installed by putting the contents of this directory to
 

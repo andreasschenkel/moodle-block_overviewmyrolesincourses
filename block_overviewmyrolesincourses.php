@@ -23,7 +23,38 @@
  */
 class block_overviewmyrolesincourses extends block_base {
     /**
-     * Initialisation
+     * @var string HTMLcode that explains the used colors
+     */
+    public static $agenda = '<div class="row" style="margin-left: 3px;">
+            <div class="overviewmyrolesincourses-coursefinished" style="width: 80px;">
+                finished
+            </div>
+            <div class="overviewmyrolesincourses-coursefinished dimmed" style="width: 110px;">
+                but not visible
+            </div>
+        </div>
+
+        <div class="row" style="margin-left: 3px;">
+            <div class="overviewmyrolesincourses-courseinprogress" style="width: 80px;">
+                activ
+            </div>
+            <div class="overviewmyrolesincourses-courseinprogress dimmed" style="width: 110px;">
+                but not visible
+            </div>
+        </div>
+
+        <div class="row" style="margin-left: 3px;">
+            <div class="overviewmyrolesincourses-coursefuture" style="width: 80px;">
+                future
+            </div>
+            <div class="overviewmyrolesincourses-coursefuture dimmed" style="width: 110px;">
+                but not visible
+            </div>
+        </div>
+    ';
+
+    /**
+     * Initialization
      *
      * @return void
      * @throws coding_exception
@@ -41,9 +72,9 @@ class block_overviewmyrolesincourses extends block_base {
      */
     public function get_content() {
         // Check if block is activated in websiteadministration plugin settings.
-        $isactiv = get_config('block_overviewmyrolesincourses', 'isactiv');
         if (!get_config('block_overviewmyrolesincourses', 'isactiv')) {
-            return "isactiv = $isactiv";
+            // Plugin is installed but is not activated.
+            return "";
         }
         if ($this->content !== null) {
             return $this->content;
@@ -57,9 +88,7 @@ class block_overviewmyrolesincourses extends block_base {
         global $USER, $OUTPUT;
         // 1. Find all courses a user is enrolled.
         $enroledcourses = enrol_get_my_courses();
-        $object = new stdClass();
-        $contextdata = [];
-        $this->content = new stdClass;
+        $text = '';
         if ($enroledcourses) {
             // 2. Find all roles that the admin has configured as supported roles for this block.
             $supportedroles = get_config('block_overviewmyrolesincourses', 'supportedroles');
@@ -76,14 +105,17 @@ class block_overviewmyrolesincourses extends block_base {
                     $data->roleshortname = $rolefixname->shortname;
                     $data->rolelocalname = $rolefixname->localname;
                     $data->mylist = $this->get_courses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
-                    $objectasjson = json_encode($data);
-                    $this->content->text .= $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
+                    // To get example-json for mustache uncomment following line of code.
+                    // This can be uses to get a json-example $objectasjson = json_encode($data);
+                    // Now render the content for this role and concatenate it with the previous rendered content.
+                    $text .= $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
                 }
             }
+            $text .= self::$agenda;
         }
-        // To get example-json for mustache uncomment following line of code.
-        // This can be uses to get a json-example $objectasjson = json_encode($object);
-        // Now render the page.
+
+        $this->content = new stdClass;
+        $this->content->text = $text;
         $footer = '';
         $this->content->footer = $footer;
         return $this->content;
@@ -99,7 +131,7 @@ class block_overviewmyrolesincourses extends block_base {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function get_courses_enroled_with_roleid($userid, $enroledcourses, $roleid): array {
+    public function get_courses_enroled_with_roleid(string $userid, array $enroledcourses, string $roleid): array {
         $result = [];
         foreach ($enroledcourses as $enroledcourse) {
             $coursecontext = context_course::instance($enroledcourse->id);
@@ -117,7 +149,7 @@ class block_overviewmyrolesincourses extends block_base {
             $userroles = get_user_roles($coursecontext, $userid, true);
             foreach ($userroles as $userrole) {
                 if ($userrole->roleid == $roleid) {
-                    $visibility = $enroledcourse->visible ? '' : 'dimmed';
+                    $dimmed = $enroledcourse->visible ? '' : 'dimmed';
 
                     $enroledcoursewithrole->roleid = $roleid;
                     $enroledcoursewithrole->roleshortname = $userrole->shortname;
@@ -133,11 +165,12 @@ class block_overviewmyrolesincourses extends block_base {
                     $url = new moodle_url('/course/view.php', ['id' => $enroledcourse->id]);
                     $urldelete = new moodle_url('/course/delete.php', ['id' => $enroledcourse->id]);
                     $enroledcoursewithrole->url = $url;
-                    $enroledcoursewithrole->visibility = $visibility;
-                    $enroledcoursewithrole->duration = $this->create_duration($enroledcourse)->duration;
-                    $enroledcoursewithrole->durationstatusofcourse = $this->create_duration($enroledcourse)->durationstatusofcourse;
-                    $enroledcoursewithrole->showdeleteicon = $showdeleteicon;
                     $enroledcoursewithrole->urldelete = $urldelete;
+                    $enroledcoursewithrole->dimmed = $dimmed;
+                    $enroledcoursewithrole->duration = $this->create_duration($enroledcourse)->duration;
+                    $cssselectordurationstatusofcourse = $this->create_duration($enroledcourse)->cssselectordurationstatusofcourse;
+                    $enroledcoursewithrole->cssselectordurationstatusofcourse = $cssselectordurationstatusofcourse;
+                    $enroledcoursewithrole->showdeleteicon = $showdeleteicon;
 
                     $result[] = $enroledcoursewithrole;
                 }
@@ -177,20 +210,20 @@ class block_overviewmyrolesincourses extends block_base {
             $enddate = get_string('noenddate', 'block_overviewmyrolesincourses') . ' ';
         }
 
-        $coursecss = '';
+        $cssselectordurationstatusofcourse = '';
         // Documentation of code: if ($course->startdate <= $now) {.
         if ($courserecord->startdate <= $now) {
             if ($courserecord->enddate > $now || !$courserecord->enddate) {
-                $coursecss = 'overviewmyrolesincourses-courseactiv';
+                $cssselectordurationstatusofcourse = 'overviewmyrolesincourses-courseinprogress';
             } else if ($courserecord->enddate < $now) {
-                $coursecss = 'overviewmyrolesincourses-coursefinished';
+                $cssselectordurationstatusofcourse = 'overviewmyrolesincourses-coursefinished';
             }
         } else {
-            $coursecss = 'overviewmyrolesincourses-coursefuture';
+            $cssselectordurationstatusofcourse = 'overviewmyrolesincourses-coursefuture';
         }
         $result = new stdClass();
         $result->duration = "$startdate - $enddate";
-        $result->durationstatusofcourse = $coursecss;
+        $result->cssselectordurationstatusofcourse = $cssselectordurationstatusofcourse;
         return $result;
     }
 }
