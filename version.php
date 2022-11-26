@@ -28,4 +28,4 @@ $plugin->maturity = MATURITY_BETA;
 $plugin->version  = 2022111504;
 $plugin->component = 'block_overviewmyrolesincourses';
 $plugin->requires = 2017111300;
-$plugin->release = 'v0.0.4';
+$plugin->release = 'v0.0.5';

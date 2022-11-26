@@ -22,36 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_overviewmyrolesincourses extends block_base {
-    /**
-     * @var string HTMLcode that explains the used colors
-     */
-    public static $agenda = '<div class="row" style="margin-left: 3px;">
-            <div class="overviewmyrolesincourses-coursefinished" style="width: 80px;">
-                finished
-            </div>
-            <div class="overviewmyrolesincourses-coursefinished dimmed" style="width: 110px;">
-                but not visible
-            </div>
-        </div>
-
-        <div class="row" style="margin-left: 3px;">
-            <div class="overviewmyrolesincourses-courseinprogress" style="width: 80px;">
-                activ
-            </div>
-            <div class="overviewmyrolesincourses-courseinprogress dimmed" style="width: 110px;">
-                but not visible
-            </div>
-        </div>
-
-        <div class="row" style="margin-left: 3px;">
-            <div class="overviewmyrolesincourses-coursefuture" style="width: 80px;">
-                future
-            </div>
-            <div class="overviewmyrolesincourses-coursefuture dimmed" style="width: 110px;">
-                but not visible
-            </div>
-        </div>
-    ';
 
     /**
      * Initialization
@@ -108,10 +78,12 @@ class block_overviewmyrolesincourses extends block_base {
                     // To get example-json for mustache uncomment following line of code.
                     // This can be uses to get a json-example $objectasjson = json_encode($data);
                     // Now render the content for this role and concatenate it with the previous rendered content.
-                    $text .= $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
+                    if (count($data->mylist) > 0) {
+                        $text .= $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
+                    }
                 }
             }
-            $text .= self::$agenda;
+            $text .= $this->create_agenda();
         }
 
         $this->content = new stdClass;
@@ -225,5 +197,42 @@ class block_overviewmyrolesincourses extends block_base {
         $result->duration = "$startdate - $enddate";
         $result->cssselectordurationstatusofcourse = $cssselectordurationstatusofcourse;
         return $result;
+    }
+
+    /**
+     * Generates the html code to explain the used colors for past, in progress and courses that start in the future.
+     *
+     * @return string the htmlcode with the explanation of the colors
+     * @throws coding_exception
+     */
+    public function create_agenda(): string {
+        $agenda = '<div class="row" style="margin-left: 3px;">
+                <div class="overviewmyrolesincourses-coursefinished" style="width: 95px;">' .
+                    get_string('past', 'block_overviewmyrolesincourses') .
+                '</div>
+
+                <div class="overviewmyrolesincourses-coursefinished dimmed" style="width: 110px;">' .
+                    get_string('butnotvisible', 'block_overviewmyrolesincourses') .
+               '</div>
+            </div>
+
+            <div class="row" style="margin-left: 3px;">
+                <div class="overviewmyrolesincourses-courseinprogress" style="width: 95px;">' .
+                   get_string('inprogress', 'block_overviewmyrolesincourses') .
+               '</div>
+                <div class="overviewmyrolesincourses-courseinprogress dimmed" style="width: 110px;">' .
+                    get_string('butnotvisible', 'block_overviewmyrolesincourses') .
+               '</div>
+            </div>
+
+            <div class="row" style="margin-left: 3px;">
+                <div class="overviewmyrolesincourses-coursefuture" style="width: 95px;">' .
+                    get_string('future', 'block_overviewmyrolesincourses') .
+               '</div>
+                <div class="overviewmyrolesincourses-coursefuture dimmed" style="width: 110px;">' .
+                    get_string('butnotvisible', 'block_overviewmyrolesincourses') .
+               '</div>
+            </div>';
+        return $agenda;
     }
 }
