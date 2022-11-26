@@ -210,12 +210,12 @@ class block_overviewmyrolesincourses extends block_base {
                 <div class="overviewmyrolesincourses-coursefinished" style="width: 95px;">' .
                     get_string('past', 'block_overviewmyrolesincourses') .
                 '</div>
-    
+
                 <div class="overviewmyrolesincourses-coursefinished dimmed" style="width: 110px;">' .
                     get_string('butnotvisible', 'block_overviewmyrolesincourses') .
                '</div>
             </div>
-    
+
             <div class="row" style="margin-left: 3px;">
                 <div class="overviewmyrolesincourses-courseinprogress" style="width: 95px;">' .
                    get_string('inprogress', 'block_overviewmyrolesincourses') .
@@ -224,7 +224,7 @@ class block_overviewmyrolesincourses extends block_base {
                     get_string('butnotvisible', 'block_overviewmyrolesincourses') .
                '</div>
             </div>
-    
+
             <div class="row" style="margin-left: 3px;">
                 <div class="overviewmyrolesincourses-coursefuture" style="width: 95px;">' .
                     get_string('future', 'block_overviewmyrolesincourses') .
