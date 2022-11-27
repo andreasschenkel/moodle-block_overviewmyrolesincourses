@@ -1,9 +1,12 @@
 ## Changelog ##
 
+[[v1.0.1]] 20221127
+- set to MATURITY_STABLE
+- fix: switch dimmed and not dimmed in mustache
+
 [[v0.0.5]] 20221125
 - only show rolesections if user is enrolled at least in one course with this role
 - substitute hard coded langstrings
-
 
 [[v0.0.4]] 20221125
 - bump version
