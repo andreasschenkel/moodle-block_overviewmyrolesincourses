@@ -1,5 +1,9 @@
 ## Changelog ##
 
+[[v1.1.1]] 20221127
+- new feature: block can be configured which courses should be shown (course ended in the past, are in progress or start in future)
+
+
 [[v1.0.1]] 20221127
 - set to MATURITY_STABLE
 - fix: switch dimmed and not dimmed in mustache

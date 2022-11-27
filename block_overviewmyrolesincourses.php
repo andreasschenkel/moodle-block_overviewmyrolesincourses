@@ -22,6 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_overviewmyrolesincourses extends block_base {
+    /** Status for courses that ended already */
+    const DURATIONSTATUS_PAST = 1;
+    /** Status for courses that are in progress */
+    const DURATIONSTATUS_INPROGRESS = 2;
+    /** Status for courses that start in the future */
+    const DURATIONSTATUS_FUTURE = 3;
 
     /**
      * Initialization
@@ -111,6 +117,27 @@ class block_overviewmyrolesincourses extends block_base {
                 // Only show invisible courses if capability moodle/course:viewhiddencourses.
                 continue;
             }
+            $showpast = $this->config->showpast;
+            $showinprogress = $this->config->showinprogress;
+            $showfuture = $this->config->showfuture;
+            switch ($this->create_duration($enroledcourse)->durationstatus) {
+                case self::DURATIONSTATUS_PAST:
+                    if ($showpast != '1') {
+                        continue 2;
+                    }
+                    break;
+                case self::DURATIONSTATUS_INPROGRESS:
+                    if ($showinprogress != '1') {
+                        continue 2;
+                    }
+                    break;
+                case self::DURATIONSTATUS_FUTURE:
+                    if ($showfuture != '1') {
+                        continue 2;
+                    }
+                    break;
+            }
+
             // Check capability to delete a course.
             $showdeleteicon = false;
             if (is_enrolled($coursecontext, $userid, 'moodle/course:delete', $onlyactive = false)) {
@@ -140,6 +167,8 @@ class block_overviewmyrolesincourses extends block_base {
                     $enroledcoursewithrole->urldelete = $urldelete;
                     $enroledcoursewithrole->dimmed = $dimmed;
                     $enroledcoursewithrole->duration = $this->create_duration($enroledcourse)->duration;
+                    $enroledcoursewithrole->durationstatus = $this->create_duration($enroledcourse)->durationstatus;
+
                     $cssselectordurationstatusofcourse = $this->create_duration($enroledcourse)->cssselectordurationstatusofcourse;
                     $enroledcoursewithrole->cssselectordurationstatusofcourse = $cssselectordurationstatusofcourse;
                     $enroledcoursewithrole->showdeleteicon = $showdeleteicon;
@@ -187,15 +216,19 @@ class block_overviewmyrolesincourses extends block_base {
         if ($courserecord->startdate <= $now) {
             if ($courserecord->enddate > $now || !$courserecord->enddate) {
                 $cssselectordurationstatusofcourse = 'overviewmyrolesincourses-courseinprogress';
+                $durationstatus = self::DURATIONSTATUS_INPROGRESS;
             } else if ($courserecord->enddate < $now) {
                 $cssselectordurationstatusofcourse = 'overviewmyrolesincourses-coursefinished';
+                $durationstatus = self::DURATIONSTATUS_PAST;
             }
         } else {
             $cssselectordurationstatusofcourse = 'overviewmyrolesincourses-coursefuture';
+            $durationstatus = self::DURATIONSTATUS_FUTURE;
         }
         $result = new stdClass();
         $result->duration = "$startdate - $enddate";
         $result->cssselectordurationstatusofcourse = $cssselectordurationstatusofcourse;
+        $result->durationstatus = $durationstatus;
         return $result;
     }
 
@@ -206,33 +239,40 @@ class block_overviewmyrolesincourses extends block_base {
      * @throws coding_exception
      */
     public function create_agenda(): string {
-        $agenda = '<div class="row" style="margin-left: 3px;">
-                <div class="overviewmyrolesincourses-coursefinished" style="width: 95px;">' .
+        $agenda = "";
+        if ($this->config->showpast) {
+            $agenda .= '<div class="row" style="margin-left: 3px;">' .
+                '<div class="overviewmyrolesincourses-coursefinished" style="width: 95px;">' .
                     get_string('past', 'block_overviewmyrolesincourses') .
-                '</div>
+                '</div>' .
 
-                <div class="overviewmyrolesincourses-coursefinished dimmed" style="width: 110px;">' .
+                '<div class="overviewmyrolesincourses-coursefinished dimmed" style="width: 110px;">' .
                     get_string('butnotvisible', 'block_overviewmyrolesincourses') .
-               '</div>
-            </div>
+                '</div>' .
+            '</div>';
+        }
 
-            <div class="row" style="margin-left: 3px;">
-                <div class="overviewmyrolesincourses-courseinprogress" style="width: 95px;">' .
+        if ($this->config->showinprogress) {
+            $agenda .= '<div class="row" style="margin-left: 3px;">' .
+                '<div class="overviewmyrolesincourses-courseinprogress" style="width: 95px;">' .
                    get_string('inprogress', 'block_overviewmyrolesincourses') .
-               '</div>
-                <div class="overviewmyrolesincourses-courseinprogress dimmed" style="width: 110px;">' .
+                '</div>' .
+                '<div class="overviewmyrolesincourses-courseinprogress dimmed" style="width: 110px;">' .
                     get_string('butnotvisible', 'block_overviewmyrolesincourses') .
-               '</div>
-            </div>
+                '</div>' .
+            '</div>';
+        }
 
-            <div class="row" style="margin-left: 3px;">
-                <div class="overviewmyrolesincourses-coursefuture" style="width: 95px;">' .
+        if ($this->config->showfuture) {
+            $agenda .= '<div class="row" style="margin-left: 3px;">' .
+                '<div class="overviewmyrolesincourses-coursefuture" style="width: 95px;">' .
                     get_string('future', 'block_overviewmyrolesincourses') .
-               '</div>
-                <div class="overviewmyrolesincourses-coursefuture dimmed" style="width: 110px;">' .
+                '</div>' .
+                '<div class="overviewmyrolesincourses-coursefuture dimmed" style="width: 110px;">' .
                     get_string('butnotvisible', 'block_overviewmyrolesincourses') .
-               '</div>
-            </div>';
+                '</div>' .
+            '</div>';
+        }
         return $agenda;
     }
 }
