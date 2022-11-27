@@ -39,7 +39,9 @@ $string['past'] = 'past';
 $string['pluginname'] = 'Overview my roles in courses';
 $string['showdeleteicon'] = 'Show a delete-icon to delete directly from the block.';
 $string['showdeleteicon_desc'] = 'If set to true a delete-icon is shown near the coursename in order to be able to delete the course directly from the block (capability moodle/course:delete needed).';
+$string['showpast'] = 'Show courses ended in the past.';
+$string['showinprogress'] = 'Show courses that are in progress.';
+$string['showfuture'] = 'Show courses which starts in the future.';
 $string['supportedroles'] = 'Roles to be supported';
 $string['supportedroles_desc'] = 'The report contains only the selected roles. The selectable roles are all roles that are assignable in coursecontext. (For example by default the role guest is not assignable in coursecontext.)';
 $string['title'] = 'Overview my roles in courses';
-
