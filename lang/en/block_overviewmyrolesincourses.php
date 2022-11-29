@@ -26,6 +26,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['butnotvisible'] = 'but not visible';
+$string['defaultshowpast'] = 'Default: Show past';
+$string['defaultshowpast_desc'] = 'By default show courses finished in the past';
+$string['defaultshowinprogress'] = 'Default: Show in progress';
+$string['defaultshowinprogress_desc'] = 'By default show courses in progress';
+$string['defaultshowfuture'] = 'Default: Show future';
+$string['defaultshowfuture_desc'] = 'By default show courses that start in future';
 $string['future'] = 'future';
 $string['inprogress'] = 'in progress';
 $string['isactiv'] = 'Activate report';

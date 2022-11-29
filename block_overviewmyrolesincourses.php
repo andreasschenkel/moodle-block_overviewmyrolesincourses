@@ -275,4 +275,19 @@ class block_overviewmyrolesincourses extends block_base {
         }
         return $agenda;
     }
+
+    /**
+     * Store the default-settings the admin has configured when adding the block.
+     *
+     * @return boolean
+     */
+    public function instance_create() {
+        $data = array(
+            'showpast' => get_config('block_overviewmyrolesincourses', 'defaultshowpast'),
+            'showinprogress' => get_config('block_overviewmyrolesincourses', 'defaultshowinprogress'),
+            'showfuture' => get_config('block_overviewmyrolesincourses', 'defaultshowfuture')
+        );
+        $this->instance_config_save($data);
+        return true;
+    }
 }
