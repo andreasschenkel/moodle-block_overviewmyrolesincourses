@@ -1,4 +1,7 @@
 ## Changelog ##
+[[v1.2.0]] 20221129
+- new feature: default setting can be configured if courses ended in the past, are in progress or start in the future should be shown by default
+- default settings are stored when adding the block to a course
 
 [[v1.1.1]] 20221127
 - new feature: block can be configured which courses should be shown (course ended in the past, are in progress or start in future)
