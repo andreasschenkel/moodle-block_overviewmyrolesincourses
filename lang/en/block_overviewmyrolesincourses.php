@@ -37,6 +37,7 @@ $string['inprogress'] = 'in progress';
 $string['isactiv'] = 'Activate report';
 $string['isactiv_desc'] = 'If activated the block can be used if the user has the needed capabilities.';
 $string['noenddate'] = 'open';
+$string['onlyfavourite'] = 'Favorites only';
 $string['overviewmyrolesincourses:myaddinstance'] = 'myaddinstance';
 $string['overviewmyrolesincourses:addinstance'] = 'addinstance';
 $string['overviewmyrolesincourses:viewcontent'] = 'viewcontent';

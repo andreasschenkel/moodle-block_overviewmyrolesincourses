@@ -1,4 +1,8 @@
 ## Changelog ##
+[[v1.3.0]] 20221210
+- new feature: new default setting to only show favourite courses
+- fix for S. H.: do not show roleshortname in title  
+
 [[v1.2.0]] 20221129
 - new feature: default setting can be configured if courses ended in the past, are in progress or start in the future should be shown by default
 - default settings are stored when adding the block to a course
