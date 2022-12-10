@@ -30,6 +30,7 @@
           "courseshortname": "Mathe fractions",
           "coursefullname": "Mathe fractions xxx",
           "visible": "1",
+          "favourite": true,
           "url": {},
           "urldelete": {},
           "dimmed": "",
@@ -45,6 +46,7 @@
           "courseshortname": "Activities (plugins)",
           "coursefullname": "Activities (plugins)",
           "visible": "1",
+          "favourite": true,
           "url": {},
           "urldelete": {},
           "dimmed": "",
@@ -60,6 +62,7 @@
           "courseshortname": "Testing filters",
           "coursefullname": "Testing filters",
           "visible": "0",
+          "favourite": true,
           "url": {},
           "urldelete": {},
           "dimmed": "dimmed",
@@ -72,7 +75,7 @@
 }}
 
 <div class="border shadow mb-4">
-    <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}">{{rolelocalname}} - {{roleshortname}}</div>
+    <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}">{{rolelocalname}}</div>
     {{#mylist}}
         <div class="border p-1">
                 <div class="{{cssselectordurationstatusofcourse}} {{dimmed}}">
@@ -87,6 +90,9 @@
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         {{/showdeleteicon}}
+                        {{#favourite}}
+                            ⭐
+                        {{/favourite}}
                     </div>
                     <div class="{{dimmed}}">
                          {{duration}}

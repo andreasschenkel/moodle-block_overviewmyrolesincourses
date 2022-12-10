@@ -72,15 +72,17 @@ class block_overviewmyrolesincourses extends block_base {
             // 3. Get all existing roles.
             $systemcontext = \context_system::instance();
             $rolefixnames = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
-            // 4. Check for every role if the role is supported and then in which courses the user has this role.
-
+            // 4. To mark favourite courses get the ids
+            $favouritecourseids = self::get_favourite_course_ids($USER->id);
+            // 5. Check for every role if the role is supported and then in which courses the user has this role.
             foreach ($rolefixnames as $rolefixname) {
                 $data = new stdClass();
                 if (in_array($rolefixname->id, $configuredsupportedroles)) {
                     // 5. If role is supported then add look in the enrolled courses if the user is enrolled with this role.
                     $data->roleshortname = $rolefixname->shortname;
                     $data->rolelocalname = $rolefixname->localname;
-                    $data->mylist = $this->get_courses_enroled_with_roleid($USER->id, $enroledcourses, $rolefixname->id);
+                    $data->mylist = $this->get_courses_enroled_with_roleid($USER->id,
+                        $enroledcourses, $rolefixname->id, $favouritecourseids);
                     // To get example-json for mustache uncomment following line of code.
                     // This can be uses to get a json-example $objectasjson = json_encode($data);
                     // Now render the content for this role and concatenate it with the previous rendered content.
@@ -105,16 +107,21 @@ class block_overviewmyrolesincourses extends block_base {
      * @param string $userid id of the user
      * @param array $enroledcourses objects of stdClass of courses a user is enrolled
      * @param string $roleid roleid of the role
+     * @param array $favouritecourseids
      * @return array
      * @throws coding_exception
      * @throws dml_exception
+     * @throws moodle_exception
      */
-    public function get_courses_enroled_with_roleid(string $userid, array $enroledcourses, string $roleid): array {
+    public function get_courses_enroled_with_roleid(string $userid,
+                                                        array $enroledcourses,
+                                                        string $roleid,
+                                                        array $favouritecourseids = []): array {
         $result = [];
         foreach ($enroledcourses as $enroledcourse) {
             $coursecontext = context_course::instance($enroledcourse->id);
             if ($enroledcourse->visible == 0 && !has_capability('moodle/course:viewhiddencourses', $coursecontext)) {
-                // Only show invisible courses if capability moodle/course:viewhiddencourses.
+                // Only show invisible courses if capability moodle/course:viewhiddencourses on this coursecontext.
                 continue;
             }
             $showpast = $this->config->showpast;
@@ -137,7 +144,11 @@ class block_overviewmyrolesincourses extends block_base {
                     }
                     break;
             }
-
+            // Show only favourite courses?
+            $onlyfavourite = $this->config->onlyfavourite;
+            if ($onlyfavourite && !in_array($enroledcourse->id, $favouritecourseids)) {
+                continue;
+            }
             // Check capability to delete a course.
             $showdeleteicon = false;
             if (is_enrolled($coursecontext, $userid, 'moodle/course:delete', $onlyactive = false)) {
@@ -159,6 +170,7 @@ class block_overviewmyrolesincourses extends block_base {
                     $enroledcoursewithrole->courseshortname = $enroledcourse->shortname;
                     $enroledcoursewithrole->coursefullname = $enroledcourse->fullname;
                     $enroledcoursewithrole->visible = $enroledcourse->visible;
+                    $enroledcoursewithrole->favourite = in_array($enroledcourse->id, $favouritecourseids) ? true : false;
 
                     // Add additional information like url to the course, ...
                     $url = new moodle_url('/course/view.php', ['id' => $enroledcourse->id]);
@@ -285,9 +297,30 @@ class block_overviewmyrolesincourses extends block_base {
         $data = array(
             'showpast' => get_config('block_overviewmyrolesincourses', 'defaultshowpast'),
             'showinprogress' => get_config('block_overviewmyrolesincourses', 'defaultshowinprogress'),
-            'showfuture' => get_config('block_overviewmyrolesincourses', 'defaultshowfuture')
+            'showfuture' => get_config('block_overviewmyrolesincourses', 'defaultshowfuture'),
+            'onlyshowfavourite' => get_config('block_overviewmyrolesincourses', 'onlyshowfavourite')
         );
         $this->instance_config_save($data);
         return true;
+    }
+
+    /**
+     * Find the ids of the courses the user with userid has marked es favourit.
+     *
+     * @param string $userid id of the user
+     * @return array
+     * @throws moodle_exception
+     */
+    public function get_favourite_course_ids($userid): array {
+        $favouritecourseids = [];
+        $ufservice = \core_favourites\service_factory::get_service_for_user_context(\context_user::instance($userid));
+        $favourites = $ufservice->find_favourites_by_type('core_course', 'courses');
+        if ($favourites) {
+            $favouritecourseids = array_map(
+                function($favourite) {
+                    return $favourite->itemid;
+                }, $favourites);
+        }
+        return $favouritecourseids;
     }
 }
