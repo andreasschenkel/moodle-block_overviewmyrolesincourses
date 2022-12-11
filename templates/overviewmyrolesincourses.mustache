@@ -75,8 +75,18 @@
 }}
 
 <div class="border shadow mb-4">
-    <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}">{{rolelocalname}}</div>
-    {{#mylist}}
+    <script>
+        function myFunction{{roleshortname}}() {
+            var element = document.getElementById("overviewmyrolesincourses-visibility-{{roleshortname}}");
+            element.classList.toggle("overviewmyrolesincourses-foldonstart");
+        }
+    </script>
+    <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}" onclick="myFunction{{roleshortname}}()">
+        {{rolelocalname}}
+    </div>
+    <div id="overviewmyrolesincourses-visibility-{{roleshortname}}"
+         class="{{#foldonstart}}overviewmyrolesincourses-foldonstart{{/foldonstart}}">
+        {{#mylist}}
         <div class="border p-1">
                 <div class="{{cssselectordurationstatusofcourse}} {{dimmed}}">
                     <div class="{{dimmed}}">
@@ -98,6 +108,7 @@
                          {{duration}}
                     </div>
                 </div>
+        </div>
+        {{/mylist}}
     </div>
-    {{/mylist}}
 </div>

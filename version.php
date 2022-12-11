@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 $plugin->maturity = MATURITY_STABLE;
-$plugin->version  = 2022121000;
+$plugin->version  = 2022121100;
 $plugin->component = 'block_overviewmyrolesincourses';
 $plugin->requires = 2017111300;
-$plugin->release = 'v1.3.0';
+$plugin->release = 'v1.4.0';

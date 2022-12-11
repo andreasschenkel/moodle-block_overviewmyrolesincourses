@@ -48,5 +48,9 @@ class block_overviewmyrolesincourses_edit_form extends block_edit_form {
         $name = get_string('onlyfavourite', 'block_overviewmyrolesincourses');
         $mform->addElement('advcheckbox', 'config_onlyfavourite', $name, '', array('group' => 4), array(0, 1));
         $mform->setDefault('config_onlyfavourite', 0);
+
+        $name = get_string('foldonstart', 'block_overviewmyrolesincourses');
+        $mform->addElement('advcheckbox', 'config_foldonstart', $name, '', array('group' => 5), array(0, 1));
+        $mform->setDefault('config_foldonstart', 0);
     }
 }

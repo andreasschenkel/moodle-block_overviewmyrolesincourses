@@ -62,6 +62,7 @@ class block_overviewmyrolesincourses extends block_base {
         }
 
         global $USER, $OUTPUT;
+        $foldonstart = $this->config->foldonstart;
         // 1. Find all courses a user is enrolled.
         $enroledcourses = enrol_get_my_courses();
         $text = '';
@@ -81,6 +82,7 @@ class block_overviewmyrolesincourses extends block_base {
                     // 5. If role is supported then add look in the enrolled courses if the user is enrolled with this role.
                     $data->roleshortname = $rolefixname->shortname;
                     $data->rolelocalname = $rolefixname->localname;
+                    $data->foldonstart = $foldonstart;
                     $data->mylist = $this->get_courses_enroled_with_roleid($USER->id,
                         $enroledcourses, $rolefixname->id, $favouritecourseids);
                     // To get example-json for mustache uncomment following line of code.
@@ -285,6 +287,12 @@ class block_overviewmyrolesincourses extends block_base {
                 '</div>' .
             '</div>';
         }
+        $agenda .= "<div class='overviewmyrolesincourses-agendanothidden'><i class='fa fa-eye' aria-hidden='true'></i> " .
+                        get_string('agendanothidden', 'block_overviewmyrolesincourses') . "</div>";
+        $agenda .= "<div class='overviewmyrolesincourses-agendahidden'><i class='fa fa-eye-slash' aria-hidden='true'></i> " .
+                        get_string('agendahidden', 'block_overviewmyrolesincourses') . "</div>";
+        $agenda .= "<div class='overviewmyrolesincourses-agendafavourite'>⭐ " .
+                        get_string('agendafavourite', 'block_overviewmyrolesincourses') . "</div>";
         return $agenda;
     }
 
@@ -298,7 +306,8 @@ class block_overviewmyrolesincourses extends block_base {
             'showpast' => get_config('block_overviewmyrolesincourses', 'defaultshowpast'),
             'showinprogress' => get_config('block_overviewmyrolesincourses', 'defaultshowinprogress'),
             'showfuture' => get_config('block_overviewmyrolesincourses', 'defaultshowfuture'),
-            'onlyshowfavourite' => get_config('block_overviewmyrolesincourses', 'onlyshowfavourite')
+            'onlyshowfavourite' => get_config('block_overviewmyrolesincourses', 'onlyshowfavourite'),
+            'foldonstart' => get_config('block_overviewmyrolesincourses', 'defaultfoldonstart')
         );
         $this->instance_config_save($data);
         return true;

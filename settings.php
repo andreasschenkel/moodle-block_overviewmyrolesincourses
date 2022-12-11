@@ -77,5 +77,11 @@ if ($ADMIN->fulltree) {
         get_string('defaultshowfuture_desc', 'block_overviewmyrolesincourses'),
         1
     ));
+    $settings->add(new admin_setting_configcheckbox(
+        'block_overviewmyrolesincourses/defaultfoldonstart',
+        get_string('defaultfoldonstart', 'block_overviewmyrolesincourses'),
+        get_string('defaultfoldonstart_desc', 'block_overviewmyrolesincourses'),
+        0
+    ));
 
 }
