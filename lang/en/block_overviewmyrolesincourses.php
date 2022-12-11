@@ -25,13 +25,19 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['agendafavourite'] = 'Favourite courses';
+$string['agendanothidden'] = 'Not hidden courses';
+$string['agendahidden'] = 'Hidden courses';
 $string['butnotvisible'] = 'but not visible';
+$string['defaultfoldonstart'] = 'Default: Fold on start';
+$string['defaultfoldonstart_desc'] = 'By default courselists are fold';
 $string['defaultshowpast'] = 'Default: Show past';
 $string['defaultshowpast_desc'] = 'By default show courses finished in the past';
 $string['defaultshowinprogress'] = 'Default: Show in progress';
 $string['defaultshowinprogress_desc'] = 'By default show courses in progress';
 $string['defaultshowfuture'] = 'Default: Show future';
 $string['defaultshowfuture_desc'] = 'By default show courses that start in future';
+$string['foldonstart'] = 'Fold courselists on start';
 $string['future'] = 'future';
 $string['inprogress'] = 'in progress';
 $string['isactiv'] = 'Activate report';
