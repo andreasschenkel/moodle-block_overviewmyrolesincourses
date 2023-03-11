@@ -65,7 +65,14 @@
 }
 
 
+
+
+
+
 .overviewmyrolesincourses-tools {
     text-align: right;
 }
 
+.summary .no-overflow p {
+    margin-bottom: 0.5rem;
+}
