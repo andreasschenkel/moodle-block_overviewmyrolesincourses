@@ -82,17 +82,26 @@
         }
     </script>
     <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}" onclick="myFunction{{roleshortname}}()">
-        {{rolelocalname}}
+        {{rolelocalname}} {{counter}} {{courses}}
     </div>
     <div id="overviewmyrolesincourses-visibility-{{roleshortname}}"
-         class="{{#foldonstart}}overviewmyrolesincourses-foldonstart{{/foldonstart}}">
+            class="{{#foldonstart}}overviewmyrolesincourses-foldonstart{{/foldonstart}}">
         {{#mylist}}
-        <div class="border p-1">
-                <div class="{{cssselectordurationstatusofcourse}} {{dimmed}}">
-                    <div class="{{dimmed}}">
-                        <a href="{{url}}" class="{{dimmed}}" title="{{coursefullname}}">
-                            <i class="icon fa fa-graduation-cap fa-fw"></i>{{coursefullname}}
-                        </a>
+        <div class="border">
+            <div class="col {{cssselectordurationstatusofcourse}} {{dimmed}}">
+                <div class="{{dimmed}}">
+                    <a href="{{url}}" class="{{dimmed}}" title="{{coursefullname}}">
+                        <i class="icon fa fa-graduation-cap fa-fw"></i>{{coursefullname}}
+                    </a>
+                </div>
+                <div class="row duration">
+                    <div class="{{dimmed}} col-8">
+                         {{duration}}
+                    </div>
+                    <div class="col-4 overviewmyrolesincourses-tools">
+                        {{#favourite}}
+                            ⭐
+                        {{/favourite}}
                         {{^dimmed}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/dimmed}}
                         {{#dimmed}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/dimmed}}
                         {{#showdeleteicon}}
@@ -100,14 +109,9 @@
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         {{/showdeleteicon}}
-                        {{#favourite}}
-                            ⭐
-                        {{/favourite}}
-                    </div>
-                    <div class="{{dimmed}}">
-                         {{duration}}
                     </div>
                 </div>
+            </div>
         </div>
         {{/mylist}}
     </div>

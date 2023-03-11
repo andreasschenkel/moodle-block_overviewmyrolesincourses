@@ -85,10 +85,15 @@ class block_overviewmyrolesincourses extends block_base {
                     $data->foldonstart = $foldonstart;
                     $data->mylist = $this->get_courses_enroled_with_roleid($USER->id,
                         $enroledcourses, $rolefixname->id, $favouritecourseids);
+                    $data->counter = count($data->mylist);
                     // To get example-json for mustache uncomment following line of code.
                     // This can be uses to get a json-example $objectasjson = json_encode($data);
                     // Now render the content for this role and concatenate it with the previous rendered content.
                     if (count($data->mylist) > 0) {
+                        $data->courses = get_string('course');
+                        if (count($data->mylist) > 1) {
+                            $data->courses = get_string('courses');
+                        }
                         $text .= $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
                     }
                 }
@@ -255,35 +260,41 @@ class block_overviewmyrolesincourses extends block_base {
     public function create_agenda(): string {
         $agenda = "";
         if ($this->config->showpast) {
-            $agenda .= '<div class="row" style="margin-left: 3px;">' .
-                '<div class="overviewmyrolesincourses-coursefinished" style="width: 95px;">' .
-                    get_string('past', 'block_overviewmyrolesincourses') .
-                '</div>' .
+            $agenda .= '<div class="container">' .
+                '<div class="row">' .
+                    '<div class="col col-sm-5 overviewmyrolesincourses-coursefinished">' .
+                        get_string('past', 'block_overviewmyrolesincourses') .
+                    '</div>' .
 
-                '<div class="overviewmyrolesincourses-coursefinished dimmed" style="width: 110px;">' .
-                    get_string('butnotvisible', 'block_overviewmyrolesincourses') .
+                    '<div class="col col-sm-7 overviewmyrolesincourses-coursefinished dimmed">' .
+                        get_string('butnotvisible', 'block_overviewmyrolesincourses') .
+                    '</div>' .
                 '</div>' .
             '</div>';
         }
 
         if ($this->config->showinprogress) {
-            $agenda .= '<div class="row" style="margin-left: 3px;">' .
-                '<div class="overviewmyrolesincourses-courseinprogress" style="width: 95px;">' .
-                   get_string('inprogress', 'block_overviewmyrolesincourses') .
-                '</div>' .
-                '<div class="overviewmyrolesincourses-courseinprogress dimmed" style="width: 110px;">' .
-                    get_string('butnotvisible', 'block_overviewmyrolesincourses') .
+            $agenda .= '<div class="container">' .
+                '<div class="row">' .
+                    '<div class="col col-sm-5 overviewmyrolesincourses-courseinprogress">' .
+                       get_string('inprogress', 'block_overviewmyrolesincourses') .
+                    '</div>' .
+                    '<div class="col col-sm-7 overviewmyrolesincourses-courseinprogress dimmed">' .
+                        get_string('butnotvisible', 'block_overviewmyrolesincourses') .
+                    '</div>' .
                 '</div>' .
             '</div>';
         }
 
         if ($this->config->showfuture) {
-            $agenda .= '<div class="row" style="margin-left: 3px;">' .
-                '<div class="overviewmyrolesincourses-coursefuture" style="width: 95px;">' .
-                    get_string('future', 'block_overviewmyrolesincourses') .
-                '</div>' .
-                '<div class="overviewmyrolesincourses-coursefuture dimmed" style="width: 110px;">' .
-                    get_string('butnotvisible', 'block_overviewmyrolesincourses') .
+            $agenda .= '<div class="container">' .
+                '<div class="row">' .
+                    '<div class="col col-sm-5 overviewmyrolesincourses-coursefuture">' .
+                        get_string('future', 'block_overviewmyrolesincourses') .
+                    '</div>' .
+                    '<div class="col col-sm-7 overviewmyrolesincourses-coursefuture dimmed">' .
+                        get_string('butnotvisible', 'block_overviewmyrolesincourses') .
+                    '</div>' .
                 '</div>' .
             '</div>';
         }
