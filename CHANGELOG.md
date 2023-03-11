@@ -1,4 +1,10 @@
 ## Changelog ##
+[[v1.4.1]] 20230311
+
+- new feature: show how many courses a user is enroled with a role
+- fix spacing problems with the agenda
+- new position for the icons that indicates if a course is hidden
+
 [[v1.4.0]] 20221211  
 - new feature: fold or unfold courselist on start
 
