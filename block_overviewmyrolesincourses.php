@@ -90,6 +90,10 @@ class block_overviewmyrolesincourses extends block_base {
                     // This can be uses to get a json-example $objectasjson = json_encode($data);
                     // Now render the content for this role and concatenate it with the previous rendered content.
                     if (count($data->mylist) > 0) {
+                        $data->courses = get_string('course');
+                        if (count($data->mylist) > 1) {
+                            $data->courses = get_string('courses');
+                        }
                         $text .= $OUTPUT->render_from_template('block_overviewmyrolesincourses/overviewmyrolesincourses', $data);
                     }
                 }
