@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$settings = new admin_settingpage( 'block_overviewmyrolesincourses',  get_string('pluginname', 'block_overviewmyrolesincourses') );
+$settings = new admin_settingpage('block_overviewmyrolesincourses', get_string('pluginname', 'block_overviewmyrolesincourses'));
 if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox(
         'block_overviewmyrolesincourses/isactiv',
@@ -47,10 +47,13 @@ if ($ADMIN->fulltree) {
                 $rolename->localname;
         }
     }
-    $settings->add(new admin_setting_configmultiselect('block_overviewmyrolesincourses/supportedroles',
+    $settings->add(new admin_setting_configmultiselect(
+        'block_overviewmyrolesincourses/supportedroles',
         get_string('supportedroles', 'block_overviewmyrolesincourses'),
         get_string('supportedroles_desc', 'block_overviewmyrolesincourses'),
-        array_keys($options), $options));
+        array_keys($options),
+        $options
+    ));
 
     $settings->add(new admin_setting_configcheckbox(
         'block_overviewmyrolesincourses/showdeleteicon',
@@ -89,5 +92,4 @@ if ($ADMIN->fulltree) {
         get_string('defaultonlyshowfavourite_desc', 'block_overviewmyrolesincourses'),
         0
     ));
-
 }

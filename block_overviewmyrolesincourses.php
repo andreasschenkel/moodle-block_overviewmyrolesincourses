@@ -83,8 +83,12 @@ class block_overviewmyrolesincourses extends block_base {
                     $data->roleshortname = $rolefixname->shortname;
                     $data->rolelocalname = $rolefixname->localname;
                     $data->foldonstart = $foldonstart;
-                    $data->mylist = $this->get_courses_enroled_with_roleid($USER->id,
-                        $enroledcourses, $rolefixname->id, $favouritecourseids);
+                    $data->mylist = $this->get_courses_enroled_with_roleid(
+                        $USER->id,
+                        $enroledcourses,
+                        $rolefixname->id,
+                        $favouritecourseids
+                    );
                     $data->counter = count($data->mylist);
                     // To get example-json for mustache uncomment following line of code.
                     // This can be uses to get a json-example $objectasjson = json_encode($data);
@@ -101,7 +105,7 @@ class block_overviewmyrolesincourses extends block_base {
             $text .= $this->create_agenda();
         }
 
-        $this->content = new stdClass;
+        $this->content = new stdClass();
         $this->content->text = $text;
         $footer = '';
         $this->content->footer = $footer;
@@ -120,10 +124,12 @@ class block_overviewmyrolesincourses extends block_base {
      * @throws dml_exception
      * @throws moodle_exception
      */
-    public function get_courses_enroled_with_roleid(string $userid,
-                                                        array $enroledcourses,
-                                                        string $roleid,
-                                                        array $favouritecourseids = []): array {
+    public function get_courses_enroled_with_roleid(
+        string $userid,
+        array $enroledcourses,
+        string $roleid,
+        array $favouritecourseids = []
+    ): array {
         $result = [];
         foreach ($enroledcourses as $enroledcourse) {
             $coursecontext = context_course::instance($enroledcourse->id);
@@ -220,7 +226,7 @@ class block_overviewmyrolesincourses extends block_base {
     private function create_duration(stdClass $course): stdClass {
         global $DB;
         $now = time();
-        $startdate = userdate($course->startdate,  get_string('strftimedatefullshort', 'core_langconfig'));
+        $startdate = userdate($course->startdate, get_string('strftimedatefullshort', 'core_langconfig'));
 
         // Code: course->enddate is empty if function enrol_get_my_courses() was used.
         $courserecord = $DB->get_record('course', ['id' => $course->id]);
@@ -313,13 +319,13 @@ class block_overviewmyrolesincourses extends block_base {
      * @return boolean
      */
     public function instance_create() {
-        $data = array(
+        $data = [
             'showpast' => get_config('block_overviewmyrolesincourses', 'defaultshowpast'),
             'showinprogress' => get_config('block_overviewmyrolesincourses', 'defaultshowinprogress'),
             'showfuture' => get_config('block_overviewmyrolesincourses', 'defaultshowfuture'),
             'onlyfavourite' => get_config('block_overviewmyrolesincourses', 'defaultonlyshowfavourite'),
-            'foldonstart' => get_config('block_overviewmyrolesincourses', 'defaultfoldonstart')
-        );
+            'foldonstart' => get_config('block_overviewmyrolesincourses', 'defaultfoldonstart'),
+        ];
         $this->instance_config_save($data);
         return true;
     }
@@ -337,9 +343,11 @@ class block_overviewmyrolesincourses extends block_base {
         $favourites = $ufservice->find_favourites_by_type('core_course', 'courses');
         if ($favourites) {
             $favouritecourseids = array_map(
-                function($favourite) {
+                function ($favourite) {
                     return $favourite->itemid;
-                }, $favourites);
+                },
+                $favourites
+            );
         }
         return $favouritecourseids;
     }

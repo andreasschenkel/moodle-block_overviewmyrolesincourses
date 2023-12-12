@@ -24,30 +24,30 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-    'block/overviewmyrolesincourses:myaddinstance' => array(
+$capabilities = [
+    'block/overviewmyrolesincourses:myaddinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        ),
-    ),
+        ],
+    ],
 
-    'block/overviewmyrolesincourses:addinstance' => array(
+    'block/overviewmyrolesincourses:addinstance' => [
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        ),
-    ),
+        ],
+    ],
 
-    'block/overviewmyrolesincourses:viewcontent' => array(
+    'block/overviewmyrolesincourses:viewcontent' => [
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'read',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        ),
-    )
-);
+        ],
+    ],
+];
