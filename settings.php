@@ -83,5 +83,11 @@ if ($ADMIN->fulltree) {
         get_string('defaultfoldonstart_desc', 'block_overviewmyrolesincourses'),
         0
     ));
+    $settings->add(new admin_setting_configcheckbox(
+        'block_overviewmyrolesincourses/defaultonlyshowfavourite',
+        get_string('defaultonlyshowfavourite', 'block_overviewmyrolesincourses'),
+        get_string('defaultonlyshowfavourite_desc', 'block_overviewmyrolesincourses'),
+        0
+    ));
 
 }

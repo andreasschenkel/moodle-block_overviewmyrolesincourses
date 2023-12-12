@@ -317,7 +317,7 @@ class block_overviewmyrolesincourses extends block_base {
             'showpast' => get_config('block_overviewmyrolesincourses', 'defaultshowpast'),
             'showinprogress' => get_config('block_overviewmyrolesincourses', 'defaultshowinprogress'),
             'showfuture' => get_config('block_overviewmyrolesincourses', 'defaultshowfuture'),
-            'onlyshowfavourite' => get_config('block_overviewmyrolesincourses', 'onlyshowfavourite'),
+            'onlyfavourite' => get_config('block_overviewmyrolesincourses', 'defaultonlyshowfavourite'),
             'foldonstart' => get_config('block_overviewmyrolesincourses', 'defaultfoldonstart')
         );
         $this->instance_config_save($data);
