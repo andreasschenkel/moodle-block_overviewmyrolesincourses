@@ -236,24 +236,29 @@ class block_overviewmyrolesincourses extends block_base {
             $enddate = get_string('noenddate', 'block_overviewmyrolesincourses') . ' ';
         }
 
-        $cssselectordurationstatusofcourse = '';
+        $result = new stdClass();
         // Documentation of code: if ($course->startdate <= $now) {.
         if ($courserecord->startdate <= $now) {
             if ($courserecord->enddate > $now || !$courserecord->enddate) {
-                $cssselectordurationstatusofcourse = 'overviewmyrolesincourses-courseinprogress';
-                $durationstatus = self::DURATIONSTATUS_INPROGRESS;
+                $result->cssselectordurationstatusofcourse = 'overviewmyrolesincourses-courseinprogress';
+                $result->durationstatus = self::DURATIONSTATUS_INPROGRESS;
             } else if ($courserecord->enddate < $now) {
-                $cssselectordurationstatusofcourse = 'overviewmyrolesincourses-coursefinished';
-                $durationstatus = self::DURATIONSTATUS_PAST;
+                $result->cssselectordurationstatusofcourse = 'overviewmyrolesincourses-coursefinished';
+                $result->durationstatus = self::DURATIONSTATUS_PAST;
             }
         } else {
-            $cssselectordurationstatusofcourse = 'overviewmyrolesincourses-coursefuture';
-            $durationstatus = self::DURATIONSTATUS_FUTURE;
+            $result->cssselectordurationstatusofcourse = 'overviewmyrolesincourses-coursefuture';
+            $result->durationstatus = self::DURATIONSTATUS_FUTURE;
         }
-        $result = new stdClass();
-        $result->duration = "$startdate - $enddate";
-        $result->cssselectordurationstatusofcourse = $cssselectordurationstatusofcourse;
-        $result->durationstatus = $durationstatus;
+
+        if ($this->config->usecategories && $courserecord->category != 0) {
+            $category = $DB->get_record("course_categories", ['id' => $courserecord->category]);
+            $categorypatharray = explode("/", $category->path);
+            $topcategory = $DB->get_record("course_categories", ['id' => $categorypatharray[1]]);
+            $result->duration = $topcategory->name;
+        } else {
+            $result->duration = "$startdate - $enddate";
+        }
         return $result;
     }
 
@@ -325,6 +330,7 @@ class block_overviewmyrolesincourses extends block_base {
             'showfuture' => get_config('block_overviewmyrolesincourses', 'defaultshowfuture'),
             'onlyfavourite' => get_config('block_overviewmyrolesincourses', 'defaultonlyshowfavourite'),
             'foldonstart' => get_config('block_overviewmyrolesincourses', 'defaultfoldonstart'),
+            'usecategories' => get_config('block_overviewmyrolesincourses', 'defaultusecategories'),
         ];
         $this->instance_config_save($data);
         return true;

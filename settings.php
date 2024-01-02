@@ -92,4 +92,10 @@ if ($ADMIN->fulltree) {
         get_string('defaultonlyshowfavourite_desc', 'block_overviewmyrolesincourses'),
         0
     ));
+    $settings->add(new admin_setting_configcheckbox(
+        'block_overviewmyrolesincourses/defaultusecategories',
+        get_string('defaultusecategories', 'block_overviewmyrolesincourses'),
+        get_string('defaultusecategories_desc', 'block_overviewmyrolesincourses'),
+        0
+    ));
 }
