@@ -188,8 +188,8 @@ class block_overviewmyrolesincourses extends block_base {
                     // Add additional information like url to the course, ...
                     $url = new moodle_url('/course/view.php', ['id' => $enroledcourse->id]);
                     $urldelete = new moodle_url('/course/delete.php', ['id' => $enroledcourse->id]);
-                    $enroledcoursewithrole->url = $url.__toString();
-                    $enroledcoursewithrole->urldelete = $urldelete.__toString();
+                    $enroledcoursewithrole->url = $url->__toString();
+                    $enroledcoursewithrole->urldelete = $urldelete->__toString();
                     $enroledcoursewithrole->dimmed = $dimmed;
                     $enroledcoursewithrole->duration = $this->create_duration($enroledcourse)->duration;
                     $enroledcoursewithrole->durationstatus = $this->create_duration($enroledcourse)->durationstatus;
