@@ -34,23 +34,23 @@ class block_overviewmyrolesincourses_edit_form extends block_edit_form {
         $mform->addElement('header', 'config_header', get_string('blocksettings', 'block'));
 
         $name = get_string('showpast', 'block_overviewmyrolesincourses');
-        $mform->addElement('advcheckbox', 'config_showpast', $name, '', array('group' => 1), array(0, 1));
+        $mform->addElement('advcheckbox', 'config_showpast', $name, '', ['group' => 1], [0, 1]);
         $mform->setDefault('config_showpast', 0);
 
         $name = get_string('showinprogress', 'block_overviewmyrolesincourses');
-        $mform->addElement('advcheckbox', 'config_showinprogress', $name, '', array('group' => 2), array(0, 1));
+        $mform->addElement('advcheckbox', 'config_showinprogress', $name, '', ['group' => 2], [0, 1]);
         $mform->setDefault('config_showinprogress', 0);
 
         $name = get_string('showfuture', 'block_overviewmyrolesincourses');
-        $mform->addElement('advcheckbox', 'config_showfuture', $name, '', array('group' => 3), array(0, 1));
+        $mform->addElement('advcheckbox', 'config_showfuture', $name, '', ['group' => 3], [0, 1]);
         $mform->setDefault('config_showfuture', 0);
 
         $name = get_string('onlyfavourite', 'block_overviewmyrolesincourses');
-        $mform->addElement('advcheckbox', 'config_onlyfavourite', $name, '', array('group' => 4), array(0, 1));
+        $mform->addElement('advcheckbox', 'config_onlyfavourite', $name, '', ['group' => 4], [0, 1]);
         $mform->setDefault('config_onlyfavourite', 0);
 
         $name = get_string('foldonstart', 'block_overviewmyrolesincourses');
-        $mform->addElement('advcheckbox', 'config_foldonstart', $name, '', array('group' => 5), array(0, 1));
+        $mform->addElement('advcheckbox', 'config_foldonstart', $name, '', ['group' => 5], [0, 1]);
         $mform->setDefault('config_foldonstart', 0);
     }
 }
