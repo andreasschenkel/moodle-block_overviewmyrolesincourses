@@ -1,4 +1,9 @@
 ## Changelog ##
+[[v1.4.2]] 20240106  
+- changes in css and template
+- add sr-only text for icon eye
+- add heading to the default websitesettings and change the langstrings by removing the word Default:
+
 [[v1.4.1]] 20230311
 
 - new feature: show how many courses a user is enroled with a role
