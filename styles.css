@@ -1,3 +1,8 @@
+.overviewmyrolesincourses {
+    box-shadow: 0 0 5px 0 #ddd;
+    margin-bottom: 10px;
+}
+
 .overviewmyrolesincourses-bg-manager {
     background-color: #aaa;
 }
@@ -54,13 +59,13 @@
     display: none;
 }
 
-.row.duration {
+.overviewmyrolesincourses .row.duration {
     margin-left: 0;
 }
-.row.duration .col-8 {
+.overviewmyrolesincourses .row.duration .col-8 {
     padding-left: 0;
 }
-.row.duration .col-4 {
+.overviewmyrolesincourses .row.duration .col-4 {
     padding-right: 10px;
 }
 
@@ -68,6 +73,6 @@
     text-align: right;
 }
 
-.summary .no-overflow p {
+.overviewmyrolesincourses .summary .no-overflow p {
     margin-bottom: 0.5rem;
 }

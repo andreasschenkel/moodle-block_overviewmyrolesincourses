@@ -74,7 +74,7 @@
     }
 }}
 
-<div class="border shadow mb-4">
+<div class="overviewmyrolesincourses">
     <script>
         function myFunction{{roleshortname}}() {
             var element = document.getElementById("overviewmyrolesincourses-visibility-{{roleshortname}}");
@@ -102,8 +102,12 @@
                         {{#favourite}}
                             ⭐
                         {{/favourite}}
-                        {{^dimmed}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/dimmed}}
-                        {{#dimmed}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/dimmed}}
+                        {{^dimmed}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>
+                            <span class="sr-only">{{# str }} courseisnothidden, block_overviewmyrolesincourses {{/str}}</span>
+                        {{/dimmed}}
+                        {{#dimmed}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                            <span class="sr-only">{{# str }} courseishidden, block_overviewmyrolesincourses {{/str}}</span>
+                        {{/dimmed}}
                         {{#showdeleteicon}}
                             <a href="{{urldelete}}">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
