@@ -183,7 +183,7 @@ class block_overviewmyrolesincourses extends block_base {
                     $enroledcoursewithrole->courseshortname = $enroledcourse->shortname;
                     $enroledcoursewithrole->coursefullname = $enroledcourse->fullname;
                     $enroledcoursewithrole->visible = $enroledcourse->visible;
-                    $enroledcoursewithrole->favourite = in_array($enroledcourse->id, $favouritecourseids) ? true : false;
+                    $enroledcoursewithrole->favourite = in_array($enroledcourse->id, $favouritecourseids);
 
                     // Add additional information like url to the course, ...
                     $url = new moodle_url('/course/view.php', ['id' => $enroledcourse->id]);
@@ -191,12 +191,14 @@ class block_overviewmyrolesincourses extends block_base {
                     $enroledcoursewithrole->url = $url->__toString();
                     $enroledcoursewithrole->urldelete = $urldelete->__toString();
                     $enroledcoursewithrole->dimmed = $dimmed;
-                    $enroledcoursewithrole->duration = $this->create_duration($enroledcourse)->duration;
                     $enroledcoursewithrole->durationstatus = $this->create_duration($enroledcourse)->durationstatus;
-
-                    $cssselectordurationstatusofcourse = $this->create_duration($enroledcourse)->cssselectordurationstatusofcourse;
-                    $enroledcoursewithrole->cssselectordurationstatusofcourse = $cssselectordurationstatusofcourse;
+                    $enroledcoursewithrole->cssselectordurationstatusofcourse =
+                        $this->create_duration($enroledcourse)->cssselectordurationstatusofcourse;
                     $enroledcoursewithrole->showdeleteicon = $showdeleteicon;
+                    $enroledcoursewithrole->usetimeranges = $this->config->usetimeranges;
+                    $enroledcoursewithrole->usecategories = $this->config->usecategories;
+                    $enroledcoursewithrole->duration = $this->create_duration($enroledcourse)->duration;
+                    $enroledcoursewithrole->category = $this->create_category($enroledcourse);
 
                     $result[] = $enroledcoursewithrole;
                 }
@@ -237,6 +239,7 @@ class block_overviewmyrolesincourses extends block_base {
         }
 
         $result = new stdClass();
+        $result->duration = "$startdate - $enddate";
         // Documentation of code: if ($course->startdate <= $now) {.
         if ($courserecord->startdate <= $now) {
             if ($courserecord->enddate > $now || !$courserecord->enddate) {
@@ -250,16 +253,35 @@ class block_overviewmyrolesincourses extends block_base {
             $result->cssselectordurationstatusofcourse = 'overviewmyrolesincourses-coursefuture';
             $result->durationstatus = self::DURATIONSTATUS_FUTURE;
         }
+        return $result;
+    }
 
-        if ($this->config->usecategories && $courserecord->category != 0) {
+    /**
+     * Returns top level course category name as a string.
+     *
+     * @param stdClass $course course used
+     * @return string top level course category name
+     * @throws coding_exception
+     * @throws dml_exception
+     */
+    private function create_category(stdClass $course): string {
+        global $DB;
+        $courserecord = $DB->get_record('course', ['id' => $course->id]);
+        $coursecontext = context_course::instance($course->id);
+
+        if ($courserecord->category != 0) {
             $category = $DB->get_record("course_categories", ['id' => $courserecord->category]);
             $categorypatharray = explode("/", $category->path);
             $topcategory = $DB->get_record("course_categories", ['id' => $categorypatharray[1]]);
-            $result->duration = $topcategory->name;
+            if ($topcategory->visible == 1 || has_capability('moodle/category:viewhiddencategories', $coursecontext)){
+                return $topcategory->name;
+            }
+            else {
+                return get_string('categoryhidden');
+            }
         } else {
-            $result->duration = "$startdate - $enddate";
+            return get_string('categoryhidden');
         }
-        return $result;
     }
 
     /**
@@ -330,6 +352,7 @@ class block_overviewmyrolesincourses extends block_base {
             'showfuture' => get_config('block_overviewmyrolesincourses', 'defaultshowfuture'),
             'onlyfavourite' => get_config('block_overviewmyrolesincourses', 'defaultonlyshowfavourite'),
             'foldonstart' => get_config('block_overviewmyrolesincourses', 'defaultfoldonstart'),
+            'usetimeranges' => get_config('block_overviewmyrolesincourses', 'defaultusetimeranges'),
             'usecategories' => get_config('block_overviewmyrolesincourses', 'defaultusecategories'),
         ];
         $this->instance_config_save($data);

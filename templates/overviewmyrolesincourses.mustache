@@ -36,7 +36,10 @@
           "dimmed": "",
           "duration": "19\/08\/30 - 19\/08\/40",
           "cssselectordurationstatusofcourse": "overviewmyrolesincourses-coursefuture",
-          "showdeleteicon": "1"
+          "showdeleteicon": "1",
+          "category": "Category 1",
+          "usetimeranges": true,
+          "usecategories": false
         },
         {
           "roleid": "3",
@@ -52,7 +55,10 @@
           "dimmed": "",
           "duration": "23\/07\/21 - 24\/07\/23",
           "cssselectordurationstatusofcourse": "overviewmyrolesincourses-courseinprogress",
-          "showdeleteicon": "1"
+          "showdeleteicon": "1",
+          "category": "Category 2",
+          "usetimeranges": false,
+          "usecategories": true
         },
         {
           "roleid": "3",
@@ -68,7 +74,10 @@
           "dimmed": "dimmed",
           "duration": "23\/07\/21 - 24\/07\/22",
           "cssselectordurationstatusofcourse": "overviewmyrolesincourses-coursefinished",
-          "showdeleteicon": "1"
+          "showdeleteicon": "1",
+          "category": "Category 3",
+          "usetimeranges": true,
+          "usecategories": true
         }
       ]
     }
@@ -82,7 +91,7 @@
         }
     </script>
     <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}" onclick="myFunction{{roleshortname}}()">
-        {{rolelocalname}} {{counter}} {{courses}}
+        {{rolelocalname}} : {{counter}} {{courses}}
     </div>
     <div id="overviewmyrolesincourses-visibility-{{roleshortname}}"
             class="{{#foldonstart}}overviewmyrolesincourses-foldonstart{{/foldonstart}}">
@@ -94,6 +103,7 @@
                         <i class="icon fa fa-graduation-cap fa-fw"></i>{{coursefullname}}
                     </a>
                 </div>
+                {{#usetimeranges}}
                 <div class="row duration">
                     <div class="{{dimmed}} col-8">
                          {{duration}}
@@ -111,6 +121,28 @@
                         {{/showdeleteicon}}
                     </div>
                 </div>
+                {{/usetimeranges}}
+                {{#usecategories}}
+                <div class="row category">
+                    <div class="{{dimmed}} col-8">
+                        {{category}}
+                    </div>
+                    {{^usetimeranges}}
+                    <div class="col-4 overviewmyrolesincourses-tools">
+                        {{#favourite}}
+                            ⭐
+                        {{/favourite}}
+                        {{^dimmed}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/dimmed}}
+                        {{#dimmed}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/dimmed}}
+                        {{#showdeleteicon}}
+                            <a href="{{urldelete}}">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        {{/showdeleteicon}}
+                    </div>
+                    {{/usetimeranges}}
+                </div>
+                {{/usecategories}}
             </div>
         </div>
         {{/mylist}}
