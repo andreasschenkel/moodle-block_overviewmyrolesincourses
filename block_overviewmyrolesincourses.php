@@ -273,10 +273,9 @@ class block_overviewmyrolesincourses extends block_base {
             $category = $DB->get_record("course_categories", ['id' => $courserecord->category]);
             $categorypatharray = explode("/", $category->path);
             $topcategory = $DB->get_record("course_categories", ['id' => $categorypatharray[1]]);
-            if ($topcategory->visible == 1 || has_capability('moodle/category:viewhiddencategories', $coursecontext)){
+            if ($topcategory->visible == 1 || has_capability('moodle/category:viewhiddencategories', $coursecontext)) {
                 return $topcategory->name;
-            }
-            else {
+            } else {
                 return get_string('categoryhidden');
             }
         } else {
