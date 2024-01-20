@@ -8,8 +8,8 @@ Reviewed version of pull request with some adaptions.
 3. display the tools in a seperate row
 4. add folder icon in front of coursecategoryname
 5. add calender icon in front of duration
-6. add langstring (category hidden) to the plugin instead of using core lang string
-7.   add indicator for roles that are not core roles and add some css for backgroundcolor for non core roles
+6. add langstring (category hidden) to the plugin instead of using core lang string 
+7. add indicator for roles that are not core roles and add some css for backgroundcolor for non core roles
 
 [[v1.5.0]] 20240120
 add pullrequest from eLearning-TUDarmstadt
