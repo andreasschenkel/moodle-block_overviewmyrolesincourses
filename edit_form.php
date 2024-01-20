@@ -52,5 +52,13 @@ class block_overviewmyrolesincourses_edit_form extends block_edit_form {
         $name = get_string('foldonstart', 'block_overviewmyrolesincourses');
         $mform->addElement('advcheckbox', 'config_foldonstart', $name, '', ['group' => 5], [0, 1]);
         $mform->setDefault('config_foldonstart', 0);
+
+        $name = get_string('usetimeranges', 'block_overviewmyrolesincourses');
+        $mform->addElement('advcheckbox', 'config_usetimeranges', $name, '', ['group' => 6], [0, 1]);
+        $mform->setDefault('config_usetimeranges', 1);
+
+        $name = get_string('usecategories', 'block_overviewmyrolesincourses');
+        $mform->addElement('advcheckbox', 'config_usecategories', $name, '', ['group' => 7], [0, 1]);
+        $mform->setDefault('config_usecategories', 0);
     }
 }

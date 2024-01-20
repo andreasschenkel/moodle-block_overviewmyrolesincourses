@@ -19,7 +19,7 @@
     background-color: #ddd;
 }
 
-.overviewmyrolesincourses-bg-guest {
+div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="editingteacher"]):not([class*="teacher"]):not([class*="student"]) {
     background-color: #eee;
 }
 
@@ -66,6 +66,16 @@
     padding-left: 0;
 }
 .overviewmyrolesincourses .row.duration .col-4 {
+    padding-right: 10px;
+}
+
+.row.category {
+    margin-left: 0;
+}
+.row.category .col-8 {
+    padding-left: 0;
+}
+.row.category .col-4 {
     padding-right: 10px;
 }
 
