@@ -90,7 +90,7 @@
             element.classList.toggle("overviewmyrolesincourses-foldonstart");
         }
     </script>
-    <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}" onclick="myFunction{{roleshortname}}()">
+    <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}} {{#iscorerole}}iscorerole{{/iscorerole}} {{^iscorerole}}isnotcorerole{{/iscorerole}}" onclick="myFunction{{roleshortname}}()">
         <span class="overviewmyrolesincourses-rolelocalname">{{rolelocalname}}</span>
         <span class="overviewmyrolesincourses-separator">:</span>
         <span class="overviewmyrolesincourses-counter">{{counter}}</span>

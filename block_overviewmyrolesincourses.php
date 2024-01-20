@@ -76,11 +76,17 @@ class block_overviewmyrolesincourses extends block_base {
             // 4. To mark favourite courses get the ids
             $favouritecourseids = self::get_favourite_course_ids($USER->id);
             // 5. Check for every role if the role is supported and then in which courses the user has this role.
+            $coreroles = ['manager', 'coursecreator', 'editingteacher', 'teacher', 'student'];
             foreach ($rolefixnames as $rolefixname) {
                 $data = new stdClass();
                 if (in_array($rolefixname->id, $configuredsupportedroles)) {
                     // 5. If role is supported then add look in the enrolled courses if the user is enrolled with this role.
                     $data->roleshortname = $rolefixname->shortname;
+                    if (in_array($rolefixname->shortname, $coreroles)) {
+                        $data->iscorerole = true;
+                    } else {
+                        $data->iscorerole = false;
+                    }
                     $data->rolelocalname = $rolefixname->localname;
                     $data->foldonstart = $foldonstart;
                     $data->mylist = $this->get_courses_enroled_with_roleid(

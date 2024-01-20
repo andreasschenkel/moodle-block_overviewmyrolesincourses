@@ -19,7 +19,7 @@
     background-color: #ddd;
 }
 
-div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="editingteacher"]):not([class*="teacher"]):not([class*="student"]) {
+.overviewmyrolesincourses .isnotcorerole {
     background-color: #eee;
 }
 
@@ -29,6 +29,7 @@ div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="
     padding-left: 5px;
     padding-right: 5px;
 }
+
 .overviewmyrolesincourses-coursefinished.dimmed {
     border-left: solid 5px rgb(166, 119, 119);
     margin-bottom: 0;
@@ -42,6 +43,7 @@ div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="
     padding-left: 5px;
     padding-right: 5px;
 }
+
 .overviewmyrolesincourses-courseinprogress.dimmed {
     border-left: solid 5px rgb(111, 169, 134);
     margin-bottom: 0;
@@ -55,12 +57,14 @@ div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="
     padding-left: 5px;
     padding-right: 5px;
 }
+
 .overviewmyrolesincourses-coursefuture.dimmed {
     border-left: solid 5px rgb(158, 190, 238);
     margin-bottom: 0;
     padding-left: 5px;
     padding-right: 5px;
 }
+
 .overviewmyrolesincourses-foldonstart {
     display: none;
 }
@@ -68,9 +72,11 @@ div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="
 .overviewmyrolesincourses .row.duration {
     margin-left: 0;
 }
+
 .overviewmyrolesincourses .row.duration .col-8 {
     padding-left: 0;
 }
+
 .overviewmyrolesincourses .row.duration .col-4 {
     padding-right: 10px;
 }
@@ -89,6 +95,3 @@ div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="
     padding-left: 3px;
     padding-right: 5px;
 }
-
-
-
