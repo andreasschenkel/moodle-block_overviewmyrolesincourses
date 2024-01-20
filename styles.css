@@ -23,37 +23,43 @@ div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="
     background-color: #eee;
 }
 
-.col.overviewmyrolesincourses-coursefinished {
+.overviewmyrolesincourses-coursefinished {
     border-left: solid 5px rgb(155, 13, 13);
     margin-bottom: 0;
     padding-left: 5px;
+    padding-right: 5px;
 }
-.col.overviewmyrolesincourses-coursefinished.dimmed {
+.overviewmyrolesincourses-coursefinished.dimmed {
     border-left: solid 5px rgb(166, 119, 119);
     margin-bottom: 0;
     padding-left: 5px;
+    padding-right: 5px;
 }
 
-.col.overviewmyrolesincourses-courseinprogress {
+.overviewmyrolesincourses-courseinprogress {
     border-left: solid 5px rgb(53, 244, 127);
     margin-bottom: 0;
     padding-left: 5px;
+    padding-right: 5px;
 }
-.col.overviewmyrolesincourses-courseinprogress.dimmed {
+.overviewmyrolesincourses-courseinprogress.dimmed {
     border-left: solid 5px rgb(111, 169, 134);
     margin-bottom: 0;
     padding-left: 5px;
+    padding-right: 5px;
 }
 
-.col.overviewmyrolesincourses-coursefuture {
+.overviewmyrolesincourses-coursefuture {
     border-left: solid 5px rgb(58, 132, 241);
     margin-bottom: 0;
     padding-left: 5px;
+    padding-right: 5px;
 }
-.col.overviewmyrolesincourses-coursefuture.dimmed {
+.overviewmyrolesincourses-coursefuture.dimmed {
     border-left: solid 5px rgb(158, 190, 238);
     margin-bottom: 0;
     padding-left: 5px;
+    padding-right: 5px;
 }
 .overviewmyrolesincourses-foldonstart {
     display: none;
@@ -69,16 +75,6 @@ div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="
     padding-right: 10px;
 }
 
-.row.category {
-    margin-left: 0;
-}
-.row.category .col-8 {
-    padding-left: 0;
-}
-.row.category .col-4 {
-    padding-right: 10px;
-}
-
 .overviewmyrolesincourses-tools {
     text-align: right;
 }
@@ -86,3 +82,13 @@ div[class*="overviewmyrolesincourses-bg-"]:not([class*="manager"]):not([class*="
 .overviewmyrolesincourses .summary .no-overflow p {
     margin-bottom: 0.5rem;
 }
+
+.container .overviewmyrolesincourses-coursefinished,
+.container .overviewmyrolesincourses-courseinprogress,
+.container .overviewmyrolesincourses-coursefuture {
+    padding-left: 3px;
+    padding-right: 5px;
+}
+
+
+

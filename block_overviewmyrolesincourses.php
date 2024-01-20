@@ -276,10 +276,10 @@ class block_overviewmyrolesincourses extends block_base {
             if ($topcategory->visible == 1 || has_capability('moodle/category:viewhiddencategories', $coursecontext)) {
                 return $topcategory->name;
             } else {
-                return get_string('categoryhidden');
+                return get_string('categoryhidden', 'block_overviewmyrolesincourses');
             }
         } else {
-            return get_string('categoryhidden');
+            return get_string('categoryhidden', 'block_overviewmyrolesincourses');
         }
     }
 

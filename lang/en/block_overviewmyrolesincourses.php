@@ -29,6 +29,7 @@ $string['agendafavourite'] = 'Favourite courses';
 $string['agendanothidden'] = 'Not hidden courses';
 $string['agendahidden'] = 'Hidden courses';
 $string['butnotvisible'] = 'but not visible';
+$string['categoryhidden'] = '(category hidden)';
 $string['courseisnothidden'] = 'Course is not hidden';
 $string['courseishidden'] = 'Course is hidden';
 $string['defaultfoldonstart'] = 'Fold on start';

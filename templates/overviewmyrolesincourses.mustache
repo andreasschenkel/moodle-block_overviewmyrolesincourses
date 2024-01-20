@@ -100,56 +100,47 @@
             class="{{#foldonstart}}overviewmyrolesincourses-foldonstart{{/foldonstart}}">
         {{#mylist}}
         <div class="border">
-            <div class="col {{cssselectordurationstatusofcourse}} {{dimmed}}">
+            <div class="{{cssselectordurationstatusofcourse}} {{dimmed}}">
                 <div class="{{dimmed}}">
                     <a href="{{url}}" class="{{dimmed}}" title="{{coursefullname}}">
                         <i class="icon fa fa-graduation-cap fa-fw"></i>{{coursefullname}}
                     </a>
                 </div>
+
                 {{#usetimeranges}}
-                <div class="row duration">
-                    <div class="{{dimmed}} col-8">
-                         {{duration}}
-                    </div>
-                    <div class="col-4 overviewmyrolesincourses-tools">
-                        {{#favourite}}
-                            ⭐
-                        {{/favourite}}
-                        {{^dimmed}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>
-                            <span class="sr-only">{{# str }} courseisnothidden, block_overviewmyrolesincourses {{/str}}</span>
-                        {{/dimmed}}
-                        {{#dimmed}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
-                            <span class="sr-only">{{# str }} courseishidden, block_overviewmyrolesincourses {{/str}}</span>
-                        {{/dimmed}}
-                        {{#showdeleteicon}}
-                            <a href="{{urldelete}}">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        {{/showdeleteicon}}
+                <div class="duration">
+                    <div class="{{dimmed}}">
+                        <i class="fa fa-calendar" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zeitraum"></i> {{duration}}
                     </div>
                 </div>
                 {{/usetimeranges}}
+
                 {{#usecategories}}
-                <div class="row category">
-                    <div class="{{dimmed}} col-8">
-                        {{category}}
+                <div class="category">
+                    <div class="{{dimmed}}">
+                        <i class="fa fa-folder-o"></i> {{category}}
                     </div>
-                    {{^usetimeranges}}
-                    <div class="col-4 overviewmyrolesincourses-tools">
-                        {{#favourite}}
-                            ⭐
-                        {{/favourite}}
-                        {{^dimmed}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>{{/dimmed}}
-                        {{#dimmed}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>{{/dimmed}}
-                        {{#showdeleteicon}}
-                            <a href="{{urldelete}}">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        {{/showdeleteicon}}
-                    </div>
-                    {{/usetimeranges}}
                 </div>
                 {{/usecategories}}
+
+                <div class="{{dimmed}} overviewmyrolesincourses-tools">
+                    {{#favourite}}
+                        ⭐
+                    {{/favourite}}
+                    {{^dimmed}}<span><i class="fa fa-eye" aria-hidden="true"></i></span>
+                        <span class="sr-only">{{# str }} courseisnothidden, block_overviewmyrolesincourses {{/str}}</span>
+                    {{/dimmed}}
+                    {{#dimmed}}<span><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                        <span class="sr-only">{{# str }} courseishidden, block_overviewmyrolesincourses {{/str}}</span>
+                    {{/dimmed}}
+                    {{#showdeleteicon}}
+                        <a href="{{urldelete}}">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    {{/showdeleteicon}}
+                </div>
+
+
             </div>
         </div>
         {{/mylist}}
