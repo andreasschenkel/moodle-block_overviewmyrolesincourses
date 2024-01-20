@@ -91,7 +91,10 @@
         }
     </script>
     <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}" onclick="myFunction{{roleshortname}}()">
-        {{rolelocalname}} : {{counter}} {{courses}}
+        <span class="overviewmyrolesincourses-rolelocalname">{{rolelocalname}}</span>
+        <span class="overviewmyrolesincourses-separator">:</span>
+        <span class="overviewmyrolesincourses-counter">{{counter}}</span>
+        <span class="overviewmyrolesincourses-courses">{{courses}}</span>
     </div>
     <div id="overviewmyrolesincourses-visibility-{{roleshortname}}"
             class="{{#foldonstart}}overviewmyrolesincourses-foldonstart{{/foldonstart}}">
