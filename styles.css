@@ -6,21 +6,26 @@
 .overviewmyrolesincourses-bg-manager {
     background-color: #aaa;
 }
-
 .overviewmyrolesincourses-bg-editingteacher {
     background-color: #bbb;
 }
-
 .overviewmyrolesincourses-bg-teacher {
     background-color: #ccc;
 }
-
 .overviewmyrolesincourses-bg-student {
     background-color: #ddd;
 }
-
-.overviewmyrolesincourses .isnotcorerole {
+.overviewmyrolesincourses-bg-guest {
     background-color: #eee;
+}
+.overviewmyrolesincourses-bg-user {
+    background-color: #eee;
+}
+.overviewmyrolesincourses-bg-frontpage {
+    background-color: #eee;
+}
+.overviewmyrolesincourses .isnotcorerole {
+    background-color: #fafafa;
 }
 
 .overviewmyrolesincourses-coursefinished {
