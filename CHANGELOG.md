@@ -10,8 +10,8 @@ Reviewed version of pull request with some adaptions.
 5. add calender icon in front of duration
 6. add langstring (category hidden) to the plugin instead of using core lang string 
 7. add indicator for roles that are not core roles and add some css for backgroundcolor for non core roles
-7. add backgroundcolor in css for all core roles and also for all non core roles 
-
+8. add backgroundcolor in css for all core roles and also for all non core roles
+9. add icon that indicates when courselist is collapsed and add hover effect to show where to show or hide courselist
 
 [[v1.5.0]] 20240120
 add pullrequest from eLearning-TUDarmstadt

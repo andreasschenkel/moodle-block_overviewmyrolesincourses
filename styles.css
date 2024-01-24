@@ -70,8 +70,26 @@
     padding-right: 5px;
 }
 
-.overviewmyrolesincourses-foldonstart {
+.overviewmyrolesincourses-content-fold {
     display: none;
+}
+
+.overviewmyrolesincourses-unfold {
+    cursor: zoom-in;
+}
+.overviewmyrolesincourses-unfold:before {
+    font-family: "FontAwesome";
+    font-weight: 900;
+    content: "\f0da";
+}
+
+.overviewmyrolesincourses-fold {
+    cursor: zoom-out;
+}
+.overviewmyrolesincourses-fold:before {
+    font-family: "FontAwesome";
+    font-weight: 900;
+    content: "\f0d7";
 }
 
 .overviewmyrolesincourses .row.duration {

@@ -86,18 +86,31 @@
 <div class="overviewmyrolesincourses">
     <script>
         function myFunction{{roleshortname}}() {
-            var element = document.getElementById("overviewmyrolesincourses-visibility-{{roleshortname}}");
-            element.classList.toggle("overviewmyrolesincourses-foldonstart");
+            // toggle table header
+            var header = document.getElementById("overviewmyrolesincourses-bg-{{roleshortname}}");
+            header.classList.toggle("overviewmyrolesincourses-unfold");
+            header.classList.toggle("overviewmyrolesincourses-fold");
+
+            // toggle table content
+            var content = document.getElementById("overviewmyrolesincourses-visibility-{{roleshortname}}");
+            content.classList.toggle("overviewmyrolesincourses-content-fold");
         }
     </script>
-    <div class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}} {{#iscorerole}}iscorerole{{/iscorerole}} {{^iscorerole}}isnotcorerole{{/iscorerole}}" onclick="myFunction{{roleshortname}}()">
+    <div id="overviewmyrolesincourses-bg-{{roleshortname}}"
+            class="border p-2 overviewmyrolesincourses-bg-{{roleshortname}}
+                {{#foldonstart}}overviewmyrolesincourses-unfold{{/foldonstart}}
+                {{^foldonstart}}overviewmyrolesincourses-fold{{/foldonstart}}
+                {{#iscorerole}}iscorerole{{/iscorerole}}
+                {{^iscorerole}}isnotcorerole{{/iscorerole}}"
+                onclick="myFunction{{roleshortname}}()">
+        <span class="foldstatus"></span>
         <span class="overviewmyrolesincourses-rolelocalname">{{rolelocalname}}</span>
         <span class="overviewmyrolesincourses-separator">:</span>
         <span class="overviewmyrolesincourses-counter">{{counter}}</span>
         <span class="overviewmyrolesincourses-courses">{{courses}}</span>
     </div>
     <div id="overviewmyrolesincourses-visibility-{{roleshortname}}"
-            class="{{#foldonstart}}overviewmyrolesincourses-foldonstart{{/foldonstart}}">
+            class="{{#foldonstart}}overviewmyrolesincourses-content-fold{{/foldonstart}}">
         {{#mylist}}
         <div class="border">
             <div class="{{cssselectordurationstatusofcourse}} {{dimmed}}">
