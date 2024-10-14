@@ -83,10 +83,6 @@
     display: none;
 }
 
-
-
-
-
 .overviewmyrolesincourses-fold {
     cursor: zoom-out;
 }
@@ -95,8 +91,6 @@
     background-color: #f00;
     display: none;
 }
-
-
 
 .overviewmyrolesincourses .row.duration {
     margin-left: 0;
