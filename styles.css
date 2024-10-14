@@ -77,20 +77,26 @@
 .overviewmyrolesincourses-unfold {
     cursor: zoom-in;
 }
-.overviewmyrolesincourses-unfold:before {
-    font-family: "FontAwesome";
-    font-weight: 900;
-    content: "\f0da";
+
+.overviewmyrolesincourses-unfold .down {
+    background-color: #f00;
+    display: none;
 }
+
+
+
+
 
 .overviewmyrolesincourses-fold {
     cursor: zoom-out;
 }
-.overviewmyrolesincourses-fold:before {
-    font-family: "FontAwesome";
-    font-weight: 900;
-    content: "\f0d7";
+
+.overviewmyrolesincourses-fold .right {
+    background-color: #f00;
+    display: none;
 }
+
+
 
 .overviewmyrolesincourses .row.duration {
     margin-left: 0;

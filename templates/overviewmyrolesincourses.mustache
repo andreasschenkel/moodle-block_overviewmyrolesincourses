@@ -103,7 +103,10 @@
                 {{#iscorerole}}iscorerole{{/iscorerole}}
                 {{^iscorerole}}isnotcorerole{{/iscorerole}}"
                 onclick="myFunction{{roleshortname}}()">
-        <span class="foldstatus"></span>
+
+        <span class="right"><i class="icon fa fa-chevron-right fa-fw"></i></span>
+        <span class="down"><i class="icon fa fa-chevron-down fa-fw"></i></span>
+
         <span class="overviewmyrolesincourses-rolelocalname">{{rolelocalname}}</span>
         <span class="overviewmyrolesincourses-separator">:</span>
         <span class="overviewmyrolesincourses-counter">{{counter}}</span>
@@ -152,7 +155,6 @@
                         </a>
                     {{/showdeleteicon}}
                 </div>
-
 
             </div>
         </div>
