@@ -1,5 +1,6 @@
 ## Changelog ##
-
+[[v1.5.2]] 20241014
+fix: missing icon to indicate if table is collapsed or unfold in boost in moodle 4.0.5
 
 [[v1.5.1]] 20240120
 Reviewed version of pull request with some adaptions.
