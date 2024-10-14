@@ -25,7 +25,8 @@
 defined('MOODLE_INTERNAL') || die;
 
 $plugin->maturity = MATURITY_STABLE;
-$plugin->version  = 2023031100;
+$plugin->version  = 2024101400;
 $plugin->component = 'block_overviewmyrolesincourses';
-$plugin->requires = 2017111300;
-$plugin->release = 'v1.4.1';
+$plugin->requires = 2022041901.00; // Moodle 4.0.1
+$plugin->supported = [401, 405,]; // Only tested for 4.0.1 and 4.0.5
+$plugin->release = 'v1.5.2';
