@@ -35,9 +35,12 @@ jobs:
         database: [ 'mariadb', 'pgsql' ]
         exclude:
           - php: '8.0'
+            moodle-branch: 'MOODLE_404_STABLE'
+          - php: '8.0'
             moodle-branch: 'MOODLE_500_STABLE'
           - php: '8.2'
             moodle-branch: 'MOODLE_401_STABLE'
+
 
     steps:
       - name: Check out repository code
