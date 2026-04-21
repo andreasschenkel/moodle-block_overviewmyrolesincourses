@@ -63,51 +63,74 @@ if ($ADMIN->fulltree) {
     ));
 
     // Heading for the default values settings.
-    $settings->add( new admin_setting_heading('block_overviewmyrolesincourses/websitesetting_heading_defaultvalues',
+    $settings->add(
+        new admin_setting_heading(
+            'block_overviewmyrolesincourses/websitesetting_heading_defaultvalues',
             get_string('websitesetting_heading_defaultvalues', 'block_overviewmyrolesincourses'),
             get_string('websitesetting_heading_defaultvalues_info', 'block_overviewmyrolesincourses')
-    ));
+        )
+    );
 
-    $settings->add(new admin_setting_configcheckbox(
-        'block_overviewmyrolesincourses/defaultshowpast',
-        get_string('defaultshowpast', 'block_overviewmyrolesincourses'),
-        get_string('defaultshowpast_desc', 'block_overviewmyrolesincourses'),
-        1
-    ));
-    $settings->add(new admin_setting_configcheckbox(
-        'block_overviewmyrolesincourses/defaultshowinprogress',
-        get_string('defaultshowinprogress', 'block_overviewmyrolesincourses'),
-        get_string('defaultshowinprogress_desc', 'block_overviewmyrolesincourses'),
-        1
-    ));
-    $settings->add(new admin_setting_configcheckbox(
-        'block_overviewmyrolesincourses/defaultshowfuture',
-        get_string('defaultshowfuture', 'block_overviewmyrolesincourses'),
-        get_string('defaultshowfuture_desc', 'block_overviewmyrolesincourses'),
-        1
-    ));
-    $settings->add(new admin_setting_configcheckbox(
-        'block_overviewmyrolesincourses/defaultfoldonstart',
-        get_string('defaultfoldonstart', 'block_overviewmyrolesincourses'),
-        get_string('defaultfoldonstart_desc', 'block_overviewmyrolesincourses'),
-        0
-    ));
-    $settings->add(new admin_setting_configcheckbox(
-        'block_overviewmyrolesincourses/defaultonlyshowfavourite',
-        get_string('defaultonlyshowfavourite', 'block_overviewmyrolesincourses'),
-        get_string('defaultonlyshowfavourite_desc', 'block_overviewmyrolesincourses'),
-        0
-    ));
-    $settings->add(new admin_setting_configcheckbox(
-        'block_overviewmyrolesincourses/defaultusetimeranges',
-        get_string('defaultusetimeranges', 'block_overviewmyrolesincourses'),
-        get_string('defaultusetimeranges_desc', 'block_overviewmyrolesincourses'),
-        1
-    ));
-    $settings->add(new admin_setting_configcheckbox(
-        'block_overviewmyrolesincourses/defaultusecategories',
-        get_string('defaultusecategories', 'block_overviewmyrolesincourses'),
-        get_string('defaultusecategories_desc', 'block_overviewmyrolesincourses'),
-        0
-    ));
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'block_overviewmyrolesincourses/defaultshowpast',
+            get_string('defaultshowpast', 'block_overviewmyrolesincourses'),
+            get_string('defaultshowpast_desc', 'block_overviewmyrolesincourses'),
+            1
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'block_overviewmyrolesincourses/defaultshowinprogress',
+            get_string('defaultshowinprogress', 'block_overviewmyrolesincourses'),
+            get_string('defaultshowinprogress_desc', 'block_overviewmyrolesincourses'),
+            1
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'block_overviewmyrolesincourses/defaultshowfuture',
+            get_string('defaultshowfuture', 'block_overviewmyrolesincourses'),
+            get_string('defaultshowfuture_desc', 'block_overviewmyrolesincourses'),
+            1
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'block_overviewmyrolesincourses/defaultfoldonstart',
+            get_string('defaultfoldonstart', 'block_overviewmyrolesincourses'),
+            get_string('defaultfoldonstart_desc', 'block_overviewmyrolesincourses'),
+            0
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'block_overviewmyrolesincourses/defaultonlyshowfavourite',
+            get_string('defaultonlyshowfavourite', 'block_overviewmyrolesincourses'),
+            get_string('defaultonlyshowfavourite_desc', 'block_overviewmyrolesincourses'),
+            0
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'block_overviewmyrolesincourses/defaultusetimeranges',
+            get_string('defaultusetimeranges', 'block_overviewmyrolesincourses'),
+            get_string('defaultusetimeranges_desc', 'block_overviewmyrolesincourses'),
+            1
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'block_overviewmyrolesincourses/defaultusecategories',
+            get_string('defaultusecategories', 'block_overviewmyrolesincourses'),
+            get_string('defaultusecategories_desc', 'block_overviewmyrolesincourses'),
+            0
+        )
+    );
 }

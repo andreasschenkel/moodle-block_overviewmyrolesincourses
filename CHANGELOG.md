@@ -1,4 +1,8 @@
 ## Changelog ##
+[[v5.0.2]] 20260421  
+- support for moodle 500, 501, 502  
+- fix some codechecker issues
+
 [[v1.5.2]] 20241014
 fix: missing icon to indicate if table is collapsed or unfold in boost in moodle 4.0.5
 
